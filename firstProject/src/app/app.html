@@ -1,0 +1,18 @@
+<div>
+  <h1 class="bg-red-500 text-white capitalize font-bold text-center y-2">Counter</h1>
+  <div class="flex gap-3 items-center  my-5">
+    <button class="border px-1 cursor-pointer" (click)="counterCick('increment')">+</button>
+    <span> {{counter}}</span>
+    <button class="border px-1 cursor-pointer" (click)="counterCick('decrement')">-</button>
+  </div>
+
+  <app-login />
+  <app-contact></app-contact>
+  <app-input-event />
+</div>
+<div>
+</div>
+
+<div id="propertybinding">
+<app-property-binding/>
+</div>

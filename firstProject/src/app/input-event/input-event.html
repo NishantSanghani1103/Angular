@@ -1,0 +1,27 @@
+<p>input-event works!</p>
+<div id="inputEvent">
+    <input class="border border-gray-400 rounded-sm my-2" (input)="handleChange($event)" placeholder="Enter Name"
+        type="text">
+
+    <input class="border border-gray-400 rounded-sm my-2" (change)="handleChange($event)" placeholder="Enter Name"
+        type="text">
+</div>
+
+<div id="selectEvent">
+    <select (change)="handleDropDownChange($event)" name="" class="border" id="">
+        <option value="car">Car</option>
+        <option value="bike">Bike</option>
+        <option value="cycle">Cycle</option>
+    </select>
+</div>
+
+<input class="border border-gray-400 rounded-sm my-2" (blur)="handleBlurChange($event)" placeholder="Enter Name"
+    type="text">
+
+<input class="border border-gray-400 rounded-sm my-2" (focus)="handleFocusChange($event)" placeholder="Enter Name"
+    type="text">
+
+
+<div class="bg-red-600 h-60 w-60 my-5" (mouseleave)="handleMouseLeaveChange($event)" id="mouseEvent"></div>
+
+<div class="bg-blue-600 h-60 w-60 my-5" (mouseenter)="handleMouseEnterChange($event)" id="mouseEvent"></div>

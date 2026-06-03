@@ -1,0 +1,27 @@
+<p>property-binding works!</p>
+<div class="my-5">
+    <button [disabled]="disble" type="button"
+        class="border border-gray-400 p-2 rounded-sm capitalize cursor-pointer disabled:cursor-not-allowed disabled:bg-red-500 disabled:text-white">click
+        Me
+    </button>
+    <br><br>
+    <button (click)="toggleButton()" class="border border-gray-400 p-2 rounded-sm capitalize cursor-pointer">toggle
+        button for disable</button>
+
+
+    <div class="my-5" id="readOnly">
+        <input [readonly]="inputreadOnly"
+         type="text" class="border border-gray-500 rounded-sm
+
+         read-only:border-red-500
+         " placeholder="Enter Name">
+        &nbsp;
+         <button class="border p-2 cursor-pointer"
+         (click)="toggleReadOnly()"
+         >Handle Read Only</button>
+    </div>
+
+    <div>
+        <img [src]="img" alt="">
+    </div>
+</div>
