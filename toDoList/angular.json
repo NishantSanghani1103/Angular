@@ -3,11 +3,11 @@
   "version": 1,
   "cli": {
     "packageManager": "npm",
-    "analytics": "d3a68153-671f-4991-af9e-d385ad98d356"
+    "analytics": "0bff62ad-cb8c-4e12-9474-22d7acf70a30"
   },
   "newProjectRoot": "projects",
   "projects": {
-    "demoProject": {
+    "toDoList": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -57,10 +57,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "demoProject:build:production"
+              "buildTarget": "toDoList:build:production"
             },
             "development": {
-              "buildTarget": "demoProject:build:development"
+              "buildTarget": "toDoList:build:development"
             }
           },
           "defaultConfiguration": "development"

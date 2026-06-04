@@ -1,0 +1,38 @@
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+    <div class="w-full max-w-sm rounded-2xl bg-white p-8 shadow-xl">
+
+        <h1 class="mb-6 text-center text-3xl font-bold text-gray-800">
+            Counter App
+        </h1>
+
+        <!-- Counter Display -->
+        <div class="mb-8 flex h-28 items-center justify-center rounded-xl bg-blue-50 border border-blue-100">
+            <span class="text-5xl font-bold text-blue-600">
+                {{counter()}}
+            </span>
+        </div>
+
+        <!-- Buttons -->
+        <div class="grid grid-cols-3 gap-3">
+
+            <button (click)="handleCounter('decrement')" class="rounded-lg
+                cursor-pointer
+                disabled:bg-transparent
+                bg-red-500 px-4 py-3 text-lg font-semibold text-white transition hover:bg-red-600 active:scale-95">
+                -
+            </button>
+
+            <button (click)="handleCounter('reset')"
+                class="rounded-lg cursor-pointer bg-gray-500 px-4 py-3 text-lg font-semibold text-white transition hover:bg-gray-600 active:scale-95">
+                Reset
+            </button>
+
+            <button (click)="handleCounter('increment')"
+                class="rounded-lg cursor-pointer bg-green-500 px-4 py-3 text-lg font-semibold text-white transition hover:bg-green-600 active:scale-95">
+                +
+            </button>
+
+        </div>
+
+    </div>
+</div>

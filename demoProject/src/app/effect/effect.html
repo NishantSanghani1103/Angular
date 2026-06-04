@@ -1,0 +1,25 @@
+<p>effect works!</p>
+
+<h3>Speed Of The Car Is :
+    <span [style.color]="textColor" class="bg-black p-1 font-bold">
+        {{speed()}}
+    </span>
+</h3>
+
+<button class="border my-2 cursor-pointer p-1" (click)="handleSpeed()">Change Speed</button>
+
+<hr class="my-2">
+<div id="signalsDataType">
+    <h1>Signal Data Type </h1>
+    <p class="my-2">Counter Value Is : {{counterSignal()}}</p>
+
+    <button (click)="handleCounterSignal()" class="border p-1">Change Counter DataType</button>
+
+    <div class="my-5" id="userList">
+        <input (change)="handleAddUser($event)" type="text" class="border border-gray-300 rounded-md"
+            placeholder="Enter UserName">
+        &nbsp;
+
+        <p>User List Is : {{userList().join(" , ")}}</p>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+<div class="min-h-screen bg-gray-100 py-10">
+  <div class="mx-auto max-w-2xl rounded-2xl bg-white p-6 shadow-lg">
+
+    <!-- Heading -->
+    <h1 class="mb-6 text-center text-3xl font-bold text-gray-800">
+      📝 To-Do List
+    </h1>
+
+    <!-- Add Task -->
+    <div class="mb-6 flex gap-3">
+      <input type="text" [value]="task()" (input)="task.set($event.target.value)" placeholder="Enter a new task..."
+        class="flex-1 rounded-lg border border-gray-300 px-4 py-2 outline-none focus:border-blue-500" />
+
+      <button (click)="addTask()"
+        class="rounded-lg cursor-pointer bg-blue-600 px-5 py-2 font-semibold text-white transition hover:bg-blue-700">
+        Add Task
+      </button>
+    </div>
+
+    <!-- Task List -->
+    <div class="overflow-hidden rounded-xl border border-gray-200">
+      <table class="w-full">
+        <thead class="bg-gray-100">
+          <tr>
+            <th class="px-4 py-3 text-left">ID</th>
+            <th class="px-4 py-3 text-left">Task Name</th>
+            <th class="px-4 py-3 text-center">Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <!-- Static Data -->
+
+          @for (item of taskList(); track item.id) {
+          <tr class="border-t">
+            <td class="px-4 py-3 font-medium">{{item.id+1}}</td>
+            <td class="px-4 py-3">{{item.task}}</td>
+            <td class="px-4 py-3 text-center">
+              <button (click)="deleteTask($index)"
+                class="rounded-md bg-red-500 px-3 py-1 text-sm font-medium text-white transition hover:bg-red-600">
+                Delete
+              </button>
+            </td>
+          </tr>
+
+          }
+
+          @empty {
+          <tr class="w-full">
+            <td class="text-center">Task Not Found</td>
+          </tr>
+          }
+
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Footer -->
+    <div class="mt-4 text-right text-sm text-gray-500">
+      Total Tasks: 3
+    </div>
+
+  </div>
+</div>

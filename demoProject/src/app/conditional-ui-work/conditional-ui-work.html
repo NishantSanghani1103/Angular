@@ -1,0 +1,27 @@
+<p>conditional-ui-work works!</p>
+
+<div class="my-3">
+    <select (change)="handleStatus($event)" name="" class="border border-gray-500 capitalize bg-gray-600 text-white p-1"
+        id="">
+        <option value="pending">pending</option>
+        <option value="process">process</option>
+        <option value="success">success</option>
+        <option value="reject">reject</option>
+    </select>
+
+    <p class="my-2">My Status Is :
+        @if (status()=='pending') {
+        <span class="capitalize text-yellow-300 bg-black p-1 font-bold">Pending</span>
+        }
+        @else if (status()=='process') {
+        <span class="capitalize text-blue-300 bg-black p-1 font-bold">process</span>
+        }
+        @else if (status()=='success') {
+        <span class="capitalize text-green-300 bg-black p-1 font-bold">success</span>
+        }
+        @else {
+        <span class="capitalize text-red-300 bg-black p-1 font-bold">reject</span>
+        }
+
+    </p>
+</div>

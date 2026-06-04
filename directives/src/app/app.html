@@ -1,0 +1,42 @@
+<h1>Hello World</h1>
+
+<div>
+  <ul>
+    <li *ngFor="let user of userList()">
+      {{user.age}}
+    </li>
+  </ul>
+</div>
+
+<!-- <div>
+  <ul>
+
+
+    @for (item of userList(); track $index) {
+    <li class="flex gap-5 items-center">
+      <span>{{item.name}}</span>
+      <span>{{item.collage}}</span>
+      <span>{{item.age}}</span>
+    </li>
+    }
+
+  </ul>
+</div> -->
+
+<hr class="my-2">
+<div>
+
+  <p class=" font-bold" [class.text-green-500]="isLoggedIn()" [class.text-red-500]="!isLoggedIn()">
+    {{
+    isLoggedIn() ?
+    'Welcome User'
+    :
+    'Please Login'
+    }}
+
+  </p>
+
+
+  <button (click)="handleLogin()" class="border border-gray-400 p-1 rounded-sm cursor-pointer my-2">{{isLoggedIn() ?
+    'LogOut':'Login'}}</button>
+</div>

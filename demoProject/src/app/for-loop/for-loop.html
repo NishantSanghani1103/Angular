@@ -1,0 +1,33 @@
+<p>for-loop works!</p>
+
+<div>
+    <p>User List :</p>
+    <ul class="list-disc">
+        @for (item of user(); track user()) {
+        <li>{{item}}</li>
+        }
+    </ul>
+</div>
+
+<hr class="my-2">
+
+<div>
+    <p>User Details :</p>
+    <p class="font-semibold">Total Users : {{userDetails().length}}</p>
+    <ul class="list-disc">
+        @for (item of userDetails(); track $index) {
+        <li [style.backgroundColor]="$even ?  '#cccc':'#fff'" class="flex gap-3 items-center">
+            {{item.id}}
+            <span>{{item.name}}</span>
+            <span>{{item.email}}</span>
+            @if($first){
+            <span class="text-red-500">Admin</span>
+            }
+            @if ($last) {
+            <span class="text-orange-500">Guest</span>
+            }
+
+        </li>
+        }
+    </ul>
+</div>
