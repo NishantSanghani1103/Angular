@@ -1,8 +1,10 @@
+import { NgClass } from '@angular/common';
 import { Component, signal } from '@angular/core';
+
 
 @Component({
   selector: 'app-conditional-ui-work',
-  imports: [],
+  imports: [NgClass],
   templateUrl: './conditional-ui-work.html',
   styleUrl: './conditional-ui-work.css',
 })

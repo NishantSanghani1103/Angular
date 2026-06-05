@@ -1,0 +1,8 @@
+<div>
+    <li class="flex my-2 items-center gap-5">
+        <span class="font-bold">{{this.index}}.</span>
+        <p class="capitalize">{{this.userList}}</p>
+        <button (click)="showUser(this.userList)" class="border border-gray-300 p-1 cursor-pointer">Select</button>
+        <button (click)="userDelete(this.userList)" class="border border-gray-300 p-1 cursor-pointer">Delete</button>
+    </li>
+</div>

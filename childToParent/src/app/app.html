@@ -1,0 +1,22 @@
+<h1>Hello</h1>
+
+
+<input class="border border-gray-300 rounded-sm p-1" type="text" placeholder="Enter UserName" name="" id="">
+&nbsp;&nbsp;
+<button class="border border-gray-400 rounded-sm p-1 cursor-pointer">Add User</button>
+<h1>Selected User :{{userName()}}</h1>
+<div class="my-2">
+  <ul>
+    @for (item of userList(); track $index) {
+    <app-child-component (selectedUser)="selectedUser($event)" [index]="$index+1" [userList]="item"
+      (deleteUser)="deleteUser($event)"></app-child-component>
+    }
+    @empty {
+    <ul>
+      <li>
+        No User Found
+      </li>
+    </ul>
+    }
+  </ul>
+</div>

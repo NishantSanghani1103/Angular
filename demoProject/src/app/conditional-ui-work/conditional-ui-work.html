@@ -9,7 +9,7 @@
         <option value="reject">reject</option>
     </select>
 
-    <p class="my-2">My Status Is :
+    <!-- <p class="my-2">My Status Is :
         @if (status()=='pending') {
         <span class="capitalize text-yellow-300 bg-black p-1 font-bold">Pending</span>
         }
@@ -22,6 +22,18 @@
         @else {
         <span class="capitalize text-red-300 bg-black p-1 font-bold">reject</span>
         }
+
+    </p> -->
+
+    <p class="my-2">My Status Is :
+        <span [ngClass]="{
+            'text-yellow-300' : status()=='pending',
+            'text-blue-500' : status()=='process',
+            'text-green-500' : status()=='success',
+            'text-red-500' : status()=='reject'
+        }" class="capitalize bg-black p-1 font-bold
+        
+          ">{{status()}}</span>
 
     </p>
 </div>

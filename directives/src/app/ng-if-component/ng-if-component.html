@@ -1,0 +1,27 @@
+<p>ng-if-comsddsdponent works!</p>
+<div>
+
+    <p *ngIf="isLogin; else elseBlock" href="">Login</p>
+
+    <ng-template #elseBlock>
+        <a href="">Logout</a>
+    </ng-template>
+
+    <!-- <a href="">{{
+        isLogin
+        ?
+        'Login'
+        :
+        'Logout'
+        }}</a> -->
+
+    <!-- @if (isLogin) {
+    <a href="">Login</a>
+    }
+    @else {
+    <a href="">LogOut</a>
+    } -->
+
+
+
+</div>

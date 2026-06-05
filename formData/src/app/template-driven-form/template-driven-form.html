@@ -1,0 +1,42 @@
+<div>
+  <p>User Name : {{ userDetails()?.name }}</p>
+  <p>User Email : {{ userDetails()?.email }}</p>
+  <p>User Password :{{ userDetails().password }}</p>
+  <p>Favorite Color :{{ userDetails().color }}</p>
+</div>
+
+<form #userForm="ngForm" (ngSubmit)="addUser(userForm.value)">
+  <input
+    ngModel
+    name="name"
+    type="text"
+    placeholder="Enter Name"
+    class="border border-gray-400 rounded-sm p-1"
+    id=""
+  />
+  <br />
+  <input
+    ngModel
+    name="email"
+    type="text"
+    placeholder="Enter Email"
+    class="border border-gray-400 rounded-sm p-1"
+    id=""
+  />
+  <br />
+  <input
+    ngModel
+    name="password"
+    type="password"
+    class="border border-gray-400 rounded-sm p-1"
+    placeholder="Enter Password"
+  />
+  <br />
+  <select name="color" class="border" id="" ngModel>
+    <option value="">Select Color</option>
+    <option value="red">Red</option>
+    <option value="blue">Blue</option>
+  </select>
+  <button type="submit" class="border border-gray-300 rounded-sm p-1">Submit</button>
+  <button type="button" class="border border-gray-300 rounded-sm p-1">Reset</button>
+</form>

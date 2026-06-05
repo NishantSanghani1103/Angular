@@ -1,0 +1,62 @@
+<form (submit)="userData($event)" action="">
+  <input
+    type="text"
+    placeholder="Enter Name"
+    class="border border-gray-400 rounded-sm p-1"
+    [ngClass]="{
+      'border-red-500': registerModel.name().touched() && registerModel.name().invalid(),
+    }"
+    [formField]="registerModel.name"
+    id=""
+  />
+  @if (registerModel.name().touched() && registerModel.name().invalid()) {
+    <p class="text-red-500 font-bold">
+      {{ registerModel.name().errors()[0].message }}
+    </p>
+  }
+  <br />
+  <input
+    type="text"
+    placeholder="Enter Email"
+    class="border border-gray-400 rounded-sm p-1"
+    [ngClass]="{
+      'border-red-500': registerModel.email().touched() && registerModel.email().invalid(),
+    }"
+    [formField]="registerModel.email"
+    id=""
+  />
+
+  @if (registerModel.email().touched() && registerModel.email().invalid()) {
+    <p class="text-red-500 font-bold">{{ registerModel.email().errors()[0].message }}</p>
+  }
+  <br />
+  <input
+    type="password"
+    [formField]="registerModel.password"
+    class="border border-gray-400 rounded-sm p-1"
+    [ngClass]="{
+      'border-red-500': registerModel.password().touched() && registerModel.password().invalid(),
+    }"
+    placeholder="Enter Password"
+  />
+  @if (registerModel.password().touched() && registerModel.password().invalid()) {
+    <p class="text-red-500 font-bold">
+      {{ registerModel.password().errors()[0].message }}
+    </p>
+  }
+  <br />
+  <button
+    [disabled]="registerModel().invalid()"
+    type="submit"
+    class="border border-gray-300 rounded-sm p-1"
+  >
+    Submit
+  </button>
+  <button (click)="resetForm()" type="button" class="border border-gray-300 rounded-sm p-1">
+    Reset
+  </button>
+</form>
+
+<!-- <p>Name Is : {{loginForm.name().value()}}</p>
+<p>Email Is : {{loginForm.email().value()}}</p>
+<p>Password Length Is : {{loginForm.password().value().length}}</p> -->

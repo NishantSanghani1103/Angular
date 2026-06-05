@@ -2,6 +2,8 @@ import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NgForOf } from '../../node_modules/@angular/common/types/_common_module-chunk';
 import { NgFor } from '@angular/common';
+import { NgIfComponent } from './ng-if-component/ng-if-component';
+
 type User = {
   name: string;
   collage: string;
@@ -9,7 +11,7 @@ type User = {
 };
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, NgFor],
+  imports: [RouterOutlet, NgFor, NgIfComponent],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
@@ -37,6 +39,6 @@ export class App {
   ]);
 
   handleLogin() {
-    this.isLoggedIn.set(!this.isLoggedIn())
+    this.isLoggedIn.set(!this.isLoggedIn());
   }
 }

@@ -1,0 +1,11 @@
+<div>
+  <input
+  [readonly]="isReadOnly"
+   type="text" class="border border-gray-300 rounded-sm my-2 p-1
+  read-only:border-red-600
+  " placeholder="Enter Name">
+  <br>
+  <button class="border border-gray-300 rounded-sm p-1 cursor-pointer"
+  (click)="handleReadOnly()"
+  >{{isReadOnly ? 'Allow Write' : 'ReadOnly'}}</button>
+</div>
