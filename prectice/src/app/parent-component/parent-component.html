@@ -1,0 +1,35 @@
+<p>parent-component works!</p>
+
+<div class="my-2">
+  <p>User Name Is : {{ userValue() }}</p>
+</div>
+<div class="my-2" id="input">
+  <input
+    [value]="userValue()"
+    (input)="handleUserValue($event.target.value)"
+    type="text"
+    placeholder="Enter UserName"
+    class="border border-gray-400 rounded-sm p-1"
+    name=""
+    id=""
+  />
+  &nbsp;&nbsp;
+  <button (click)="addUser()" class="border border-gray-300 rounded-sm p-1 cursor-pointer">
+    Add User
+  </button>
+</div>
+<div>
+  <ul>
+    @for (item of userList(); track $index) {
+      <app-child-component
+        (selectedUser)="selectedUser($event)"
+        (deleteUser)="deleteUser($event)"
+        [index]="$index + 1"
+        [userList]="item"
+      ></app-child-component>
+    }
+    @empty {
+        <p>User Not Found...!!</p>
+    }
+  </ul>
+</div>

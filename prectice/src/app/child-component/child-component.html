@@ -1,0 +1,13 @@
+<li class="flex items-center gap-5 my-4">
+  <span class="font-bold">{{ index }}</span>
+  <span>{{ userList }}</span>
+  <button (click)="showUser(userList)" class="border border-gray-300 rounded-sm p-1 cursor-pointer">
+    Select
+  </button>
+  <button
+    (click)="handleDeleteUser(userList)"
+    class="border border-gray-300 rounded-sm p-1 cursor-pointer"
+  >
+    Delete
+  </button>
+</li>

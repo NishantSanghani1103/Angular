@@ -1,0 +1,50 @@
+<p>products works!</p>
+<div class="my-5">
+  <h1>Mobile Phone</h1>
+  <a
+    [queryParams]="{
+      id: productList().id,
+      name: productList().name,
+      category: productList().category,
+    }"
+    routerLink="/product-query"
+    >Read More
+  </a>
+</div>
+
+<div class="my-5">
+  <h1>Leptops</h1>
+  <a routerLink="/product-query" [queryParams]="{ id: 1, name: 'thinkpad', category: 'dell' }"
+    >Read More
+  </a>
+</div>
+
+<div class="my-5">
+  <button (click)="productParams()" class="border rounded-sm p-1 cursor-pointer">
+    Click For QueryParams
+  </button>
+</div>
+
+<div class="my-5">
+  <h1>Leptops</h1>
+  <a class="text-blue-500" routerLink="/product-routes/leptops"
+    >Click Here For Router Parameter
+  </a>
+</div>
+
+
+<div class="my-5">
+  <h1>Leptops</h1>
+  <a class="text-blue-500" [routerLink]="['/product-routes',productList().name]"
+    >Click Here For Router Parameter Dynamic
+  </a>
+</div>
+
+<div class="my-5">
+  <h1>Leptops</h1>
+
+  <button (click)="productRoutes()" class="border rounded-sm p-1 cursor-pointer">
+    Click For Routes
+  </button>
+
+</div>

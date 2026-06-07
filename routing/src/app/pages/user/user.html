@@ -1,0 +1,11 @@
+<p>user works!</p>
+<div class="my-2">
+  <ul>
+    @for (item of userData(); track $index) {
+      <li class="flex items-center gap-3">
+        <span class="font-bold">{{ $index + 1 }}.</span>
+        <span [routerLink]="['/user',item.name]" class="capitalize cursor-pointer">{{ item.name }}</span>
+      </li>
+    }
+  </ul>
+</div>
