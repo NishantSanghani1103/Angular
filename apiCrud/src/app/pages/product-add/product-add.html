@@ -1,0 +1,115 @@
+<div class="min-h-screen bg-gray-100 py-10">
+  <div class="max-w-3xl mx-auto px-4">
+    <!-- Header -->
+    <h1 class="text-3xl font-bold text-gray-800 mb-8">{{ IsId() ? 'Edit' : 'Add' }} Product</h1>
+
+    <!-- Form Card -->
+    <form (submit)="productData($event)" action="">
+      <div class="bg-white rounded-xl shadow p-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <!-- Title -->
+          <div class="md:col-span-2">
+            <label class="text-sm font-medium text-gray-700">Title</label>
+            <input
+              [formField]="productForm.title"
+              type="text"
+              placeholder="Enter product title"
+              class="w-full mt-1 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none"
+            />
+          </div>
+
+          <!-- Description -->
+          <div class="md:col-span-2">
+            <label class="text-sm font-medium text-gray-700">Description</label>
+            <textarea
+              [formField]="productForm.description"
+              rows="3"
+              placeholder="Enter product description"
+              class="w-full mt-1 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none"
+            ></textarea>
+          </div>
+
+          <!-- Category -->
+          <div>
+            <label class="text-sm font-medium text-gray-700">Category</label>
+            <input
+              [formField]="productForm.category"
+              type="text"
+              placeholder="e.g. Fashion"
+              class="w-full mt-1 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none"
+            />
+          </div>
+
+          <!-- Brand -->
+          <div>
+            <label class="text-sm font-medium text-gray-700">Brand</label>
+            <input
+              [formField]="productForm.brand"
+              type="text"
+              placeholder="e.g. Adidas"
+              class="w-full mt-1 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none"
+            />
+          </div>
+
+          <!-- Price -->
+          <div>
+            <label class="text-sm font-medium text-gray-700">Price</label>
+            <input
+              [formField]="productForm.price"
+              type="number"
+              placeholder="Enter price"
+              class="w-full mt-1 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none"
+            />
+          </div>
+
+          <!-- Stock -->
+          <div>
+            <label class="text-sm font-medium text-gray-700">Stock</label>
+            <input
+              [formField]="productForm.stock"
+              type="number"
+              placeholder="Enter stock"
+              class="w-full mt-1 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none"
+            />
+          </div>
+
+          <!-- Rating -->
+          <div>
+            <label class="text-sm font-medium text-gray-700">Rating</label>
+            <input
+              [formField]="productForm.rating"
+              type="number"
+              step="0.1"
+              placeholder="e.g. 4.5"
+              class="w-full mt-1 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none"
+            />
+          </div>
+
+          <!-- Thumbnail -->
+          <div class="md:col-span-2">
+            <label class="text-sm font-medium text-gray-700">Thumbnail URL</label>
+            <input
+              type="text"
+              [formField]="productForm.thumbnail"
+              placeholder="Image URL"
+              class="w-full mt-1 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none"
+            />
+          </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="mt-6 flex justify-end gap-3">
+          <button class="px-5 py-2 rounded-lg bg-gray-200 text-gray-700 hover:bg-gray-300">
+            Cancel
+          </button>
+
+          <button
+            class="px-5 cursor-pointer py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700"
+          >
+            {{ IsId() ? 'Edit' : 'Save' }} Product
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

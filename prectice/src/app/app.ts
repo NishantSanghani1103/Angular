@@ -7,11 +7,12 @@ import { CounterController } from './counter-controller/counter-controller';
 import { ParentComponent } from './parent-component/parent-component';
 import { FromData } from './from-data/from-data';
 import { ConditionalCss } from './conditional-css/conditional-css';
+import { RoutingPrectice } from './pages/routing-prectice/routing-prectice';
 
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, PropertyBinding, Signals, CounterDisplay, CounterController,ParentComponent,FromData,ConditionalCss],
+  imports: [RouterOutlet, PropertyBinding, Signals, CounterDisplay, CounterController,ParentComponent,FromData,ConditionalCss,RoutingPrectice],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })

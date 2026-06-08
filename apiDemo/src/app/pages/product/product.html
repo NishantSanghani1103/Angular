@@ -1,0 +1,36 @@
+<div class="min-h-screen bg-gray-100 py-10">
+  <div class="max-w-7xl mx-auto px-4">
+    <!-- Heading -->
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold text-gray-800">Products</h1>
+      <p class="text-gray-500 mt-2">Browse our latest collection</p>
+    </div>
+
+    <!-- Search & Filter -->
+    <div class="bg-white p-4 rounded-lg shadow-sm mb-8 flex flex-col md:flex-row gap-4">
+      <input
+        type="text"
+        placeholder="Search products..."
+        class="flex-1 border border-gray-300 rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-blue-500"
+      />
+
+      <select
+        class="border border-gray-300 rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-blue-500"
+      >
+        <option>All Categories</option>
+        <option>Electronics</option>
+        <option>Fashion</option>
+        <option>Home</option>
+      </select>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      @for (item of productData(); track item.id) {
+        <app-product-list [productData]="item"></app-product-list>
+      }
+    </div>
+  </div>
+</div>
+
+<router-outlet></router-outlet>

@@ -1,0 +1,8 @@
+<p>product works!</p>
+<div class="my-5">
+  <ul>
+    @for (item of products.products(); track $index) {
+      <li [routerLink]="['/product',item.name]" class="m-4 capitalize cursor-pointer">{{ item.name }}</li>
+    }
+  </ul>
+</div>

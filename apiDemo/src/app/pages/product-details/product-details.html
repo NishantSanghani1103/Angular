@@ -1,0 +1,108 @@
+<div class="min-h-screen bg-gray-100 py-10">
+  <div class="max-w-6xl mx-auto px-4">
+
+    <!-- Product Details Card -->
+    <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+      <div class="grid md:grid-cols-2 gap-8">
+
+        <!-- Product Image -->
+        <div class="p-6">
+          <img
+            [src]="singleProductData()?.thumbnail"
+            alt="Essence Mascara Lash Princess"
+            class="w-full rounded-xl object-cover"
+          />
+        </div>
+
+        <!-- Product Info -->
+        <div class="p-8">
+
+          <span
+            class="inline-block bg-blue-100 text-blue-600 text-sm px-3 py-1 rounded-full"
+          >
+         {{singleProductData()?.category}}
+          </span>
+
+          <h1 class="text-4xl font-bold text-gray-800 mt-4">
+            {{singleProductData()?.title}}
+          </h1>
+
+          <p class="text-gray-500 mt-4 leading-relaxed">
+           {{singleProductData()?.description}}
+          </p>
+
+          <!-- Price -->
+          <div class="mt-6 flex items-center gap-4">
+            <span class="text-4xl font-bold text-gray-900">
+              $ {{singleProductData()?.price}}
+            </span>
+
+            <span
+              class="bg-green-100 text-green-600 px-3 py-1 rounded-full text-sm font-medium"
+            >
+            {{singleProductData()?.discountPercentage}} % Off
+            </span>
+          </div>
+
+          <!-- Rating -->
+          <div class="mt-4 flex items-center gap-2">
+            <span class="text-yellow-500 text-xl">Rating</span>
+            <span class="text-gray-600">({{singleProductData()?.rating}})</span>
+          </div>
+
+          <!-- Stock -->
+          <div class="mt-4">
+            <span
+              class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm"
+            >
+              In Stock ({{singleProductData()?.stock}} Available)
+            </span>
+          </div>
+
+          <!-- Product Info -->
+          <div class="mt-8 space-y-3">
+            <p>
+              <strong>Brand:</strong> {{singleProductData()?.brand}}
+            </p>
+
+            <p>
+              <strong>SKU:</strong> {{singleProductData()?.sku}}
+            </p>
+
+            <p>
+              <strong>Weight:</strong> {{singleProductData()?.weight}}g
+            </p>
+
+            <p>
+              <strong>Warranty:</strong> 1 Week Warranty
+            </p>
+
+            <p>
+              <strong>Shipping:</strong> {{singleProductData()?.shippingInformation}}
+            </p>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="mt-8 flex gap-4">
+            <button
+              class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition"
+            >
+              Add to Cart
+            </button>
+
+            <button
+              class="border border-gray-300 px-6 py-3 rounded-lg hover:bg-gray-100 transition"
+            >
+              Add to Wishlist
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Reviews Section -->
+ 
+
+  </div>
+</div>

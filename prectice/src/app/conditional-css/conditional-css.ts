@@ -1,5 +1,6 @@
+import { NgClass } from '@angular/common';
 import { Component, signal } from '@angular/core';
-import { NgClass } from "../../../node_modules/@angular/common/types/_common_module-chunk";
+
 
 @Component({
   selector: 'app-conditional-css',
