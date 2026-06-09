@@ -1,13 +1,13 @@
 {
   "products": [
     {
-      "title": "Nishant's Leptop",
+      "title": "ThinkPad",
       "description": "Copilot+ PC: A new era of AI: The fastest, most intelligent Surface Laptop ever",
       "category": "leptop",
       "brand": "dell",
-      "price": 49000,
-      "stock": 2,
-      "rating": 1.9,
+      "price": 50000,
+      "stock": 5,
+      "rating": 4.5,
       "thumbnail": "https://m.media-amazon.com/images/I/510uTHyDqGL._AC_UF1000,1000_QL80_.jpg",
       "id": "2BxNuYB2-9I"
     }

@@ -1,0 +1,76 @@
+<div class="min-h-screen bg-slate-100 py-10 px-4">
+  <div class="max-w-3xl mx-auto">
+    <!-- Header -->
+    <div class="bg-white rounded-xl shadow-md p-6 mb-6">
+      <h1 class="text-3xl font-bold text-center">My Todo List</h1>
+
+      <p class="text-center text-gray-500 mt-2">Organize your daily tasks</p>
+    </div>
+
+    <!-- Add Task Section -->
+    <div class="bg-white rounded-xl shadow-md p-6 mb-6">
+      <div class="flex flex-col sm:flex-row gap-3">
+        <input
+          [value]="taskValue()"
+          (input)="handleChange($event)"
+          name="task"
+          type="text"
+          placeholder="Enter a new task..."
+          class="flex-1 border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <button
+          (click)="saveTask()"
+          class="bg-blue-600 cursor-pointer hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium"
+        >
+          {{ editIndex() ? 'Edit' : 'Add' }} Task
+        </button>
+      </div>
+    </div>
+
+    <!-- Task Summary -->
+    <div class="grid grid-cols-1 justify-center md:grid-cols-3 gap-4 mb-6">
+      <div class="bg-white rounded-xl shadow p-4 text-center">
+        <h3 class="text-gray-500">Total Tasks</h3>
+        <p class="text-2xl font-bold">{{taskList().length}}</p>
+      </div>
+    </div>
+
+    <!-- Filters -->
+
+    <!-- Todo List -->
+    <div class="bg-white rounded-xl shadow-md overflow-hidden">
+      <div class="p-5 border-b">
+        <h2 class="text-xl font-semibold">Tasks</h2>
+      </div>
+
+      <!-- Task Item -->
+      @for (item of taskList(); track $index) {
+        <div class="p-4 border-b flex items-center justify-between gap-4">
+          <div class="flex items-center gap-3">
+            <p class="font-semibold">{{ $index + 1 }}.</p>
+
+            <span class="font-medium"> {{ item }} </span>
+          </div>
+
+          <div class="flex gap-2">
+            <button
+              (click)="editTask($index)"
+              class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded-md"
+            >
+              Edit
+            </button>
+
+            <button
+              (click)="deleteTask($index)"
+              class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+      } @empty {
+        <p class="p-3">Task Not Found...!!</p>
+      }
+    </div>
+  </div>
+</div>

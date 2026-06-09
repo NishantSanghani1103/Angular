@@ -1,10 +1,31 @@
 <p>conditional-css works!</p>
 
-<select class="border border-gray-300 rounded-sm p-1" name="" id="">
-  <option value="">--Select Color--</option>
-  <option value="">Red</option>
-  <option value="">Blue</option>
-  <option value="">Green</option>
+<select (change)="handleColor($event)" class="border border-gray-300 rounded-sm p-1" name="" id="">
+  <option value="white">--Select Color--</option>
+  <option value="red">Red</option>
+  <option value="blue">Blue</option>
+  <option value="green">Green</option>
 </select>
 
-<p cl>{{ date() }}</p>
+<!-- <p
+  [ngClass]="{
+    'bg-white text-black': colorValue() == 'white',
+    'bg-red-500 text-white': colorValue() == 'red',
+    'bg-green-500 text-white': colorValue() == 'green',
+    'bg-blue-500 text-white': colorValue() == 'blue',
+  }"
+  class="p-1 my-3 border rounded-md border-gray-400 w-fit"
+>
+  {{ date() }}
+</p> -->
+<p
+  class="p-1 my-3 border rounded-md border-gray-400 w-fit"
+  [class.bg-red-500]="colorValue() === 'red'"
+  [class.bg-green-500]="colorValue() === 'green'"
+  [class.bg-blue-500]="colorValue() === 'blue'"
+  [class.bg-white]="colorValue() === 'white'"
+  [class.text-white]="colorValue() !== 'white'"
+  [class.text-black]="colorValue() === 'white'"
+>
+  {{ date() }}
+</p>

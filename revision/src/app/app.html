@@ -1,0 +1,253 @@
+<div class="min-h-screen bg-gray-100 p-6">
+  <div class="max-w-5xl mx-auto bg-white shadow-lg rounded-xl p-8">
+    <h1 class="text-3xl font-bold mb-8 text-center">User Registration Form</h1>
+
+    <form (submit)="registerData($event)" class="space-y-8">
+      <!-- Text Inputs -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label class="block mb-2 font-medium">First Name</label>
+          <input
+            [formField]="registerForm.firstName"
+            type="text"
+            placeholder="Enter first name"
+            class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
+        <div>
+          <label class="block mb-2 font-medium">Last Name</label>
+          <input
+            [formField]="registerForm.lastName"
+            type="text"
+            placeholder="Enter last name"
+            class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+      </div>
+
+      <!-- Email & Password -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label class="block mb-2 font-medium">Email</label>
+          <input
+            [formField]="registerForm.email"
+            type="email"
+            placeholder="example@gmail.com"
+            class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
+        <div>
+          <label class="block mb-2 font-medium">Password</label>
+          <input
+            [formField]="registerForm.password"
+            type="password"
+            placeholder="Enter password"
+            class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+      </div>
+
+      <!-- Number & Tel -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label class="block mb-2 font-medium">Age</label>
+          <input
+            [formField]="registerForm.age"
+            type="number"
+            placeholder="Enter age"
+            class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
+        <div>
+          <label class="block mb-2 font-medium">Phone Number</label>
+          <input
+            [formField]="registerForm.mobile"
+            type="tel"
+            placeholder="+91 9876543210"
+            class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+      </div>
+
+      <!-- Date Inputs -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div>
+          <label class="block mb-2 font-medium">Date</label>
+          <input
+            [formField]="registerForm.date"
+            type="date"
+            class="w-full border rounded-lg px-4 py-2"
+          />
+        </div>
+
+        <div>
+          <label class="block mb-2 font-medium">Time</label>
+          <input
+            [formField]="registerForm.time"
+            type="time"
+            class="w-full border rounded-lg px-4 py-2"
+          />
+        </div>
+
+        <!-- <div>
+          <label class="block mb-2 font-medium">Date & Time</label>
+          <input type="datetime-local" class="w-full border rounded-lg px-4 py-2" />
+        </div> -->
+      </div>
+
+      <!-- Color, Range -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label class="block mb-2 font-medium">Favorite Color</label>
+          <input
+            [formField]="registerForm.color"
+            type="color"
+            class="w-full h-12 border rounded-lg"
+          />
+        </div>
+
+        <div>
+          <label class="block mb-2 font-medium">Experience Level</label>
+          <input [formField]="registerForm.experience" type="range" class="w-full" />
+        </div>
+      </div>
+
+      <!-- Select -->
+      <div>
+        <label class="block mb-2 font-medium">Country</label>
+        <select [formField]="registerForm.country" class="w-full border rounded-lg px-4 py-2">
+          <option>Select Country</option>
+          <option value="india">India</option>
+          <option value="usa">USA</option>
+          <option value="canada">Canada</option>
+          <option value="australia">Australia</option>
+        </select>
+      </div>
+
+      <!-- Multi Select -->
+      <div>
+        <label class="block mb-2 font-medium">Skills</label>
+        <select multiple class="w-full border rounded-lg px-4 py-2 h-32">
+          <option value="angular">Angular</option>
+          <option value="react">React</option>
+          <option value="vue">Vue</option>
+          <option value="node">Node.js</option>
+          <option value="java">Java</option>
+        </select>
+      </div>
+
+      <!-- Radio Buttons -->
+      <div>
+        <label class="block mb-3 font-medium">Gender</label>
+
+        <div class="flex flex-wrap gap-6">
+          <label class="flex items-center gap-2">
+            <input [formField]="registerForm.gender" type="radio" />
+            Male
+          </label>
+
+          <label class="flex items-center gap-2">
+            <input [formField]="registerForm.gender" type="radio" />
+            Female
+          </label>
+
+          <label class="flex items-center gap-2">
+            <input [formField]="registerForm.gender" type="radio" />
+            Other
+          </label>
+        </div>
+      </div>
+
+      <!-- Checkboxes -->
+      <div>
+        <label class="block mb-3 font-medium">Hobbies</label>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <label class="flex items-center gap-2">
+            <input [formField]="registerForm.hobbies.reading" type="checkbox" />
+            Reading
+          </label>
+
+          <label class="flex items-center gap-2">
+            <input type="checkbox" [formField]="registerForm.hobbies.sports" />
+            Sports
+          </label>
+
+          <label class="flex items-center gap-2">
+            <input type="checkbox" [formField]="registerForm.hobbies.music" />
+            Music
+          </label>
+
+          <label class="flex items-center gap-2">
+            <input type="checkbox" [formField]="registerForm.hobbies.travel" />
+            Travel
+          </label>
+        </div>
+      </div>
+
+      <!-- File Upload -->
+      <div>
+        <label class="block mb-2 font-medium">Upload Resume</label>
+        <input type="file" class="w-full border rounded-lg p-2" [formField]="registerForm.file" />
+      </div>
+
+      <!-- Search, URL -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label class="block mb-2 font-medium">Search</label>
+          <input
+            [formField]="registerForm.search"
+            type="search"
+            placeholder="Search..."
+            class="w-full border rounded-lg px-4 py-2"
+          />
+        </div>
+
+        <div>
+          <label class="block mb-2 font-medium">Website</label>
+          <input
+            type="url"
+            [formField]="registerForm.website"
+            placeholder="https://example.com"
+            class="w-full border rounded-lg px-4 py-2"
+          />
+        </div>
+      </div>
+
+      <!-- Textarea -->
+      <div>
+        <label class="block mb-2 font-medium">Address</label>
+        <textarea
+          rows="4"
+          [formField]="registerForm.address"
+          placeholder="Enter your address"
+          class="w-full border rounded-lg px-4 py-2"
+        ></textarea>
+      </div>
+
+      <!-- Hidden Input -->
+      <input type="hidden" value="12345" />
+
+      <!-- Submit Buttons -->
+      <div class="flex flex-wrap gap-4 pt-4">
+        <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
+          Submit
+        </button>
+
+        <button type="reset" class="bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600">
+          Reset
+        </button>
+
+        <button
+          type="button"
+          class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700"
+        >
+          Button
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

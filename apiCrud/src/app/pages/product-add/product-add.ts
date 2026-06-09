@@ -61,7 +61,7 @@ export class ProductAdd {
           console.log(res);
           const { title, description, category, brand, price, stock, rating, thumbnail } = res;
           this.productModel.set({
-            title: title,
+            title,
             description,
             category,
             brand,

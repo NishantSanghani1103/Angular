@@ -32,6 +32,9 @@
         (refresh)="getProduct()"
          [pData]="item"></app-product-row>
       }
+      @empty {
+        <p>Data Not Found...</p>
+      }
     </div>
   </div>
 </div>
