@@ -1,0 +1,151 @@
+<div class="container vh-100 d-flex justify-content-center align-items-center">
+  <div class="card shadow-lg border-0" style="width: 450px">
+    <div class="card-body p-4">
+      <h2 class="text-center mb-4">Registration Form</h2>
+
+      <form (submit)="saveData($event)" [formGroup]="registerFrom">
+        <!-- Name -->
+        <div class="mb-3">
+          <label class="form-label">Name</label>
+          <input type="text" formControlName="name" class="form-control" placeholder="Enter Name" />
+
+          <app-validation-error [control]="f['name']" lable="name"></app-validation-error>
+        </div>
+
+        <!-- Email -->
+        <div class="mb-3">
+          <label class="form-label">Email</label>
+          <input
+            type="email"
+            formControlName="email"
+            class="form-control"
+            placeholder="Enter Email"
+          />
+          <app-validation-error [control]="f['email']" lable="email"></app-validation-error>
+        </div>
+
+        <!-- Password -->
+        <div class="mb-4">
+          <label class="form-label">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            formControlName="password"
+            placeholder="Enter Password"
+          />
+          <app-validation-error [control]="f['password']" lable="password"></app-validation-error>
+        </div>
+
+        <div class="mb-4">
+          <label class="form-label d-block">Gender</label>
+
+          <div class="form-check form-check-inline">
+            <input
+              formControlName="gender"
+              value="male"
+              class="form-check-input"
+              type="radio"
+              name="gender"
+            />
+            <label class="form-check-label">Male</label>
+          </div>
+
+          <div class="form-check form-check-inline">
+            <input
+              class="form-check-input"
+              formControlName="gender"
+              value="female"
+              type="radio"
+              name="gender"
+            />
+            <label class="form-check-label">Female</label>
+          </div>
+
+          <div class="form-check form-check-inline">
+            <input
+              value="other"
+              class="form-check-input"
+              type="radio"
+              formControlName="gender"
+              name="gender"
+            />
+            <label class="form-check-label">Other</label>
+          </div>
+          <app-validation-error [control]="f['gender']" lable="gender"></app-validation-error>
+        </div>
+
+        <div class="mb-4">
+          <label class="form-label d-block">Hobbies</label>
+
+          <div class="row">
+            <div class="col-md-3">
+              <div class="form-check">
+                <input
+                  (change)="changeHobby($event, 'Reading')"
+                  class="form-check-input"
+                  type="checkbox"
+                />
+                <label class="form-check-label">Reading</label>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="form-check">
+                <input
+                  (change)="changeHobby($event, 'Sports')"
+                  class="form-check-input"
+                  type="checkbox"
+                />
+                <label class="form-check-label">Sports</label>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="form-check">
+                <input
+                  (change)="changeHobby($event, 'Music')"
+                  class="form-check-input"
+                  type="checkbox"
+                />
+                <label class="form-check-label">Music</label>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="form-check">
+                <input
+                  (change)="changeHobby($event, 'Travel')"
+                  class="form-check-input"
+                  type="checkbox"
+                />
+                <label class="form-check-label">Travel</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label class="form-label">Skills</label>
+          <select formControlName="skills" class="form-select" multiple size="5">
+            <option value="1">Angular</option>
+            <option value="2">React</option>
+            <option value="3">Vue</option>
+          </select>
+        </div>
+
+        <input (change)="onFileSelected($event)" class="mb-4" type="file" />
+        <p class="my-2">Multiple Files</p>
+        <input (change)="onFileSelectedMultipleFile($event)" multiple class="mb-4" type="file" />
+
+        <!-- Buttons -->
+        <div class="d-flex gap-2">
+          <button [disabled]="registerFrom.invalid" type="submit" class="btn btn-primary flex-fill">
+            Submit
+          </button>
+
+          <button type="reset" class="btn btn-secondary flex-fill">Reset</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

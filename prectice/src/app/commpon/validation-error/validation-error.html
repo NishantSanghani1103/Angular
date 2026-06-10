@@ -1,0 +1,15 @@
+@if (control && control.touched && control.invalid && control.errors; as Error) {
+  <div class="my-1">
+    @if (Error['required']) {
+      <p class="text-danger fw-bold text-capitalize">{{ lable }} Is Required</p>
+    }
+    @if (Error['minlength']) {
+      <p class="text-danger fw-bold text-capitalize">
+        {{ lable }} Must Contains atleast {{ Error['minlength'].requiredLength }} Characters
+      </p>
+    }
+    @if (Error['email']) {
+      <small class="text-danger fw-bold text-capitalize"> Please enter a valid email address. </small>
+    }
+  </div>
+}

@@ -1,0 +1,301 @@
+<div class="container py-5">
+  <div class="card shadow-lg border-0">
+    <div class="card-body p-4 p-md-5">
+      <h1 class="text-center mb-5">User Registration Form</h1>
+
+      <form (ngSubmit)="registerSaveData($event)" [formGroup]="registerForm">
+        <!-- First Name & Last Name -->
+        <div class="row g-3 mb-4">
+          <div class="col-md-6">
+            <label class="form-label">First Name</label>
+            <input
+              formControlName="firstName"
+              type="text"
+              class="form-control"
+              placeholder="Enter first name"
+            />
+
+            <app-validattion-error [control]="f['firstName']" label="firstName">
+            </app-validattion-error>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Last Name</label>
+            <input
+              type="text"
+              formControlName="lastName"
+              class="form-control"
+              placeholder="Enter last name"
+            />
+            <app-validattion-error [control]="f['lastName']" label="Last Name">
+            </app-validattion-error>
+          </div>
+        </div>
+
+        <!-- Email & Password -->
+        <div class="row g-3 mb-4">
+          <div class="col-md-6">
+            <label class="form-label">Email</label>
+            <input
+              formControlName="email"
+              type="email"
+              class="form-control"
+              placeholder="example@gmail.com"
+            />
+            <app-validattion-error [control]="f['email']" label="Email"> </app-validattion-error>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Password</label>
+            <input
+              formControlName="password"
+              type="password"
+              class="form-control"
+              placeholder="Enter password"
+            />
+            <app-validattion-error [control]="f['password']" label="Password">
+            </app-validattion-error>
+          </div>
+        </div>
+
+        <!-- Age & Phone -->
+        <div class="row g-3 mb-4">
+          <div class="col-md-6">
+            <label class="form-label">Age</label>
+            <input
+              formControlName="age"
+              type="number"
+              class="form-control"
+              placeholder="Enter age"
+            />
+            <app-validattion-error [control]="f['pattern']" label="pattern"> </app-validattion-error>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Phone Number</label>
+            <input
+              formControlName="phone"
+              type="tel"
+              class="form-control"
+              placeholder="+91 9876543210"
+            />
+
+            <app-validattion-error [control]="f['phone']" label="pattern">
+            </app-validattion-error>
+          </div>
+        </div>
+
+        <!-- Date & Time -->
+        <div class="row g-3 mb-4">
+          <div class="col-md-6">
+            <label class="form-label">Date</label>
+            <input formControlName="date" type="date" class="form-control" />
+
+            <app-validattion-error [control]="f['date']" label="Date"> </app-validattion-error>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Time</label>
+            <input type="time" formControlName="time" class="form-control" />
+
+            <app-validattion-error [control]="f['time']" label="Time"> </app-validattion-error>
+          </div>
+        </div>
+
+        <!-- Color & Range -->
+        <div class="row g-3 mb-4">
+          <div class="col-md-6">
+            <label class="form-label">Favorite Color</label>
+            <input type="color" formControlName="color" class="form-control form-control-color" />
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Experience Level</label>
+            <input type="range" formControlName="experience" class="form-range" />
+          </div>
+        </div>
+
+        <!-- Country -->
+        <div class="mb-4">
+          <label class="form-label">Country</label>
+          <select formControlName="country" class="form-select">
+            <option value="">Select Country</option>
+            <option>India</option>
+            <option>USA</option>
+            <option>Canada</option>
+            <option>Australia</option>
+          </select>
+
+          <app-validattion-error [control]="f['country']" label="Country"> </app-validattion-error>
+        </div>
+
+        <!-- Skills -->
+        <div class="mb-4">
+          <label class="form-label">Skills</label>
+          <select formControlName="skills" class="form-select" multiple size="5">
+            <option>Angular</option>
+            <option>React</option>
+            <option>Vue</option>
+            <option>Node.js</option>
+            <option>Java</option>
+          </select>
+
+          <app-validattion-error [control]="f['skills']" label="Skills"> </app-validattion-error>
+        </div>
+
+        <!-- Gender -->
+        <div class="mb-4">
+          <label class="form-label d-block">Gender</label>
+
+          <div class="form-check form-check-inline">
+            <input
+              formControlName="gender"
+              value="male"
+              class="form-check-input"
+              type="radio"
+              name="gender"
+            />
+            <label class="form-check-label">Male</label>
+          </div>
+
+          <div class="form-check form-check-inline">
+            <input
+              class="form-check-input"
+              value="female"
+              formControlName="gender"
+              type="radio"
+              name="gender"
+            />
+            <label class="form-check-label">Female</label>
+          </div>
+
+          <div class="form-check form-check-inline">
+            <input
+              value="other"
+              class="form-check-input"
+              formControlName="gender"
+              type="radio"
+              name="gender"
+            />
+            <label class="form-check-label">Other</label>
+          </div>
+
+          <app-validattion-error [control]="f['gender']" label="Gender"> </app-validattion-error>
+        </div>
+
+        <!-- Hobbies -->
+        <div class="mb-4">
+          <label class="form-label d-block">Hobbies</label>
+
+          <div class="row">
+            <div class="col-md-3">
+              <div class="form-check">
+                <input
+                  (change)="onHobbyChane($event, 'reading')"
+                  class="form-check-input"
+                  type="checkbox"
+                />
+                <label class="form-check-label">Reading</label>
+              </div>
+              <app-validattion-error [control]="hobbies" label="Hobbies"> </app-validattion-error>
+            </div>
+
+            <div class="col-md-3">
+              <div class="form-check">
+                <input
+                  (change)="onHobbyChane($event, 'sport')"
+                  class="form-check-input"
+                  type="checkbox"
+                />
+                <label class="form-check-label">Sports</label>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="form-check">
+                <input
+                  (change)="onHobbyChane($event, 'music')"
+                  class="form-check-input"
+                  type="checkbox"
+                />
+                <label class="form-check-label">Music</label>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="form-check">
+                <input
+                  (change)="onHobbyChane($event, 'travel')"
+                  class="form-check-input"
+                  type="checkbox"
+                />
+                <label class="form-check-label">Travel</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- File Upload -->
+        <div class="mb-4">
+          <label class="form-label">Upload Resume</label>
+          <input
+            (change)="onFileSelected($event)"
+            type="file"
+            formControlName="resume"
+            class="form-control"
+          />
+        </div>
+
+        <!-- Search & Website -->
+        <div class="row g-3 mb-4">
+          <div class="col-md-6">
+            <label class="form-label">Search</label>
+            <input
+              type="search"
+              formControlName="search"
+              class="form-control"
+              placeholder="Search..."
+            />
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Website</label>
+            <input
+              type="url"
+              formControlName="website"
+              class="form-control"
+              placeholder="https://example.com"
+            />
+            <app-validattion-error [control]="f['website']" label="Website">
+            </app-validattion-error>
+          </div>
+        </div>
+
+        <!-- Address -->
+        <div class="mb-4">
+          <label class="form-label">Address</label>
+          <textarea
+            rows="4"
+            formControlName="address"
+            class="form-control"
+            placeholder="Enter your address"
+          ></textarea>
+
+          <app-validattion-error [control]="f['address']" label="Address"> </app-validattion-error>
+        </div>
+
+        <!-- Hidden Input -->
+        <input type="hidden" value="12345" />
+
+        <!-- Buttons -->
+        <div class="d-flex flex-wrap gap-2">
+          <button [disabled]="registerForm.invalid" type="submit" class="btn btn-primary">Submit</button>
+
+          <button type="reset" class="btn btn-secondary">Reset</button>
+
+          <button type="button" class="btn btn-success">Button</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
