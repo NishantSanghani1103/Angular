@@ -1,0 +1,25 @@
+@if (control && control.touched && control.invalid && control.errors; as Error) {
+  @if (Error['required']) {
+    <small class="text-danger fw-bold text-capitalize"> {{ label }} is required. </small>
+  }
+  @if (Error['minlength']) {
+    <small class="text-danger fw-bold text-capitalize">
+      {{ label }} Should Be Atleast {{ Error['minlength'].requiredLength }} Characters.
+    </small>
+  }
+  @if (Error['maxlength']) {
+    <small class="text-danger fw-bold text-capitalize">
+      {{ label }} Should Be Less Than {{ Error['maxlength'].requiredLength }} Characters.
+    </small>
+  }
+  @if (Error['min']) {
+    <small class="text-danger fw-bold text-capitalize">
+      {{ label }} Should Be More Than {{ Error['min'].min }}.
+    </small>
+  }
+  @if (Error['max']) {
+    <small class="text-danger fw-bold text-capitalize">
+      {{ label }} Should Be Less Than Or {{ Error['max'].max }}.
+    </small>
+  }
+}

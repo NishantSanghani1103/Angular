@@ -1,0 +1,145 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <!-- Header -->
+      <h1 class="mb-4 fw-bold">Add Product</h1>
+
+      <!-- Form Card -->
+      <form [formGroup]="productForm" (submit)="productSave($event)">
+        <div class="card shadow-sm">
+          <div class="card-body p-4">
+            <div class="row g-3">
+              <!-- Title -->
+              <div class="col-12">
+                <label class="form-label">Title</label>
+                <input
+                  formControlName="title"
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter product title"
+                />
+                <app-form-validation-error
+                  [control]="f['title']"
+                  [label]="'title'"
+                ></app-form-validation-error>
+              </div>
+
+              <!-- Description -->
+              <div class="col-12">
+                <label class="form-label">Description</label>
+                <textarea
+                  formControlName="description"
+                  class="form-control"
+                  rows="3"
+                  placeholder="Enter product description"
+                ></textarea>
+                <app-form-validation-error
+                  [control]="f['description']"
+                  [label]="'description'"
+                ></app-form-validation-error>
+              </div>
+
+              <!-- Category -->
+              <div class="col-md-6">
+                <label class="form-label">Category</label>
+                <input
+                  formControlName="category"
+                  type="text"
+                  class="form-control"
+                  placeholder="e.g. Fashion"
+                />
+                <app-form-validation-error
+                  [control]="f['category']"
+                  [label]="'category'"
+                ></app-form-validation-error>
+              </div>
+
+              <!-- Brand -->
+              <div class="col-md-6">
+                <label class="form-label">Brand</label>
+                <input
+                  formControlName="brand"
+                  type="text"
+                  class="form-control"
+                  placeholder="e.g. Adidas"
+                />
+                <app-form-validation-error
+                  [control]="f['brand']"
+                  [label]="'brand'"
+                ></app-form-validation-error>
+              </div>
+
+              <!-- Price -->
+              <div class="col-md-6">
+                <label class="form-label">Price</label>
+                <input
+                  formControlName="price"
+                  type="number"
+                  class="form-control"
+                  placeholder="Enter price"
+                />
+                <app-form-validation-error
+                  [control]="f['price']"
+                  [label]="'price'"
+                ></app-form-validation-error>
+              </div>
+
+              <!-- Stock -->
+              <div class="col-md-6">
+                <label class="form-label">Stock</label>
+                <input
+                  formControlName="stock"
+                  type="number"
+                  class="form-control"
+                  placeholder="Enter stock"
+                />
+                <app-form-validation-error
+                  [control]="f['stock']"
+                  [label]="'stock'"
+                ></app-form-validation-error>
+              </div>
+
+              <!-- Rating -->
+              <div class="col-md-6">
+                <label class="form-label">Rating</label>
+                <input
+                  formControlName="rating"
+                  type="number"
+                  step="0.1"
+                  class="form-control"
+                  placeholder="e.g. 4.5"
+                />
+                <app-form-validation-error
+                  [control]="f['rating']"
+                  [label]="'rating'"
+                ></app-form-validation-error>
+              </div>
+
+              <!-- Thumbnail -->
+              <div class="col-12">
+                <label class="form-label">Thumbnail URL</label>
+                <input
+                  formControlName="image"
+                  type="text"
+                  class="form-control"
+                  placeholder="Image URL"
+                />
+                <app-form-validation-error
+                  [control]="f['image']"
+                  [label]="'image'"
+                ></app-form-validation-error>
+              </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="mt-4 d-flex justify-content-end gap-2">
+              <button type="button" class="btn btn-secondary">Cancel</button>
+
+              <button [disabled]="productForm.invalid" type="submit" class="btn btn-primary">Save Product</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+.product-card {
+  transition: all 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-8px);
+}
+
+.product-card img {
+  height: 250px;
+  object-fit: cover;
+}
+
+.card {
+  border-radius: 15px;
+}
+
+.hero-image {
+  border-radius: 20px;
+}
+
+.badge {
+  font-size: 12px;
+}
+
+.btn {
+  border-radius: 8px;
+}
+
+section {
+  overflow: hidden;
+}

@@ -1,0 +1,35 @@
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.nav-link {
+  color: #333;
+  transition: 0.3s;
+}
+
+.nav-link:hover {
+  color: #0d6efd;
+}
+
+.input-group .form-control {
+  height: 45px;
+}
+
+.input-group .btn {
+  height: 45px;
+}
+
+.bi {
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.bi:hover {
+  color: #0d6efd;
+}
+
+h2 {
+  letter-spacing: 1px;
+}
