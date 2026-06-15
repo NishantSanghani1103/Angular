@@ -1,0 +1,32 @@
+@if (control && control.touched && control.invalid && control.errors; as errors) {
+  <div class="mt-1">
+
+    @if (errors['required']) {
+      <small class="text-danger fw-bold">
+        {{ label }} is required.
+      </small>
+    }
+
+    @if (errors['minlength']) {
+      <small class="text-danger fw-bold">
+        {{ label }} must contain at least
+        {{ errors['minlength'].requiredLength }}
+        characters.
+      </small>
+    }
+
+    @if (errors['maxlength']) {
+      <small class="text-danger fw-bold">
+        {{ label }} cannot exceed
+        {{ errors['maxlength'].requiredLength }}
+        characters.
+      </small>
+    }
+
+    @if (errors['email']) {
+      <small class="text-danger fw-bold">
+        Please enter a valid email address.
+      </small>
+    }
+  </div>
+}

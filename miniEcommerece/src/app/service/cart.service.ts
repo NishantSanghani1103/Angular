@@ -7,7 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class CartService {
   cartItems = signal<CartItemType[]>(JSON.parse(localStorage.getItem('CART') ?? '[]'));
-  totalPrice = computed(() => this.cartItems().reduce((acc, cuu) => acc + cuu.price * cuu.qty, 0));
+  totalPrice = computed(() => this.cartItems().reduce((acc, cuu) => acc + cuu.price * cuu.qty, 0).toFixed(2));
 
   constructor(private toast: ToastrService) {}
 

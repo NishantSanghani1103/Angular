@@ -18,7 +18,7 @@
           class="nav-link active"
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }"
-          routerLink="/"
+          routerLink="/home"
           >Home</a
         >
       </li>
@@ -40,14 +40,20 @@
     </form>
 
     <div class="d-flex align-items-center text-white">
-      <span class="me-3">Login</span>
-
+      @if (auth.user()) {
+        <span 
+        (click)="auth.logOut()"
+        class="me-3" style="cursor: pointer" routerLink="/">LogOut</span>
+      }
+      @else {
+         <span class="me-3" style="cursor: pointer" routerLink="/">LogIn</span>
+      }
       <button routerLink="/cart" class="btn btn-warning position-relative">
         Cart
         <span
           class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
         >
-          {{cart.cartItems().length}}
+          {{ cart.cartItems().length }}
         </span>
       </button>
     </div>

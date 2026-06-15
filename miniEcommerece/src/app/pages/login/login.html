@@ -1,52 +1,39 @@
 <div class="container py-5">
-
   <div class="row justify-content-center">
-
     <div class="col-md-5">
-
       <div class="card shadow-sm border-0 p-4">
-
         <h3 class="fw-bold text-center mb-4">Login</h3>
 
         <!-- Email -->
-        <div class="mb-3">
-          <label class="form-label">Email</label>
-          <input type="email" class="form-control" placeholder="Enter email">
-        </div>
+        <form (submit)="loginData()" [formGroup]="loginForm" action="">
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input
+              formControlName="email"
+              type="email"
+              class="form-control"
+              placeholder="Enter email"
+            />
+            <app-validation-error [control]="f['email']" label="email"></app-validation-error>
+          </div>
 
-        <!-- Password -->
-        <div class="mb-3">
-          <label class="form-label">Password</label>
-          <input type="password" class="form-control" placeholder="Enter password">
-        </div>
+          <!-- Password -->
+          <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input
+              formControlName="password"
+              type="password"
+              class="form-control"
+              placeholder="Enter password"
+            />
+            <app-validation-error [control]="f['password']" label="password"></app-validation-error>
+          </div>
 
-        <!-- Remember -->
-        <div class="form-check mb-3">
-          <input class="form-check-input" type="checkbox">
-          <label class="form-check-label">Remember me</label>
-        </div>
-
-        <!-- Button -->
-        <button class="btn btn-dark w-100">
-          Login
-        </button>
-
+          <!-- Button -->
+          <button [disabled]="loginForm.invalid" class="btn btn-dark w-100">Login</button>
+        </form>
         <!-- Links -->
-        <div class="text-center mt-3">
-          <a href="#" class="text-decoration-none">Forgot Password?</a>
-        </div>
-
-        <hr>
-
-        <p class="text-center mb-0">
-          Don't have an account?
-          <a href="#" class="fw-bold text-decoration-none">Register</a>
-        </p>
-
       </div>
-
     </div>
-
   </div>
-
 </div>

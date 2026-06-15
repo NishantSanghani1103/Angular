@@ -1,4 +1,4 @@
-import { Component, Input, signal } from '@angular/core';
+import { Component, Input, OnInit, signal } from '@angular/core';
 import { Product } from '../../models/product.model/product.model';
 import { CartService } from '../../service/cart.service';
 
@@ -8,10 +8,28 @@ import { CartService } from '../../service/cart.service';
   templateUrl: './product-row.html',
   styleUrl: './product-row.css',
 })
-export class ProductRow {
+export class ProductRow implements OnInit {
   @Input() pData!: Product;
+  isInCart = signal(false);
+
   constructor(private cart: CartService) {}
-  addTOCart() {
+
+  ngOnInit() {
+    this.checkIfInCart();
+  }
+
+  checkIfInCart() {
+    const checkInCart = this.cart
+      .cartItems()
+      .find((value) => value.id === Number(this.pData.id));
+    if (checkInCart) {
+      this.isInCart.set(true);
+    } else {
+      this.isInCart.set(false);
+    }
+  }
+
+  addToCart() {
     console.log(this.pData);
     const cartObj = {
       id: Number(this.pData.id),
@@ -21,5 +39,11 @@ export class ProductRow {
       qty: 1,
     };
     this.cart.addToCart(cartObj);
+    this.checkIfInCart();
+  }
+
+  removeFromCart() {
+    this.cart.removeCart(Number(this.pData.id));
+    this.checkIfInCart();
   }
 }

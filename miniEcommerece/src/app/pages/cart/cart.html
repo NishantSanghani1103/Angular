@@ -10,7 +10,9 @@
         <app-cart-row [item]="item"></app-cart-row>
       }
       <!-- Cart Item 2 -->
-
+      @empty {
+        <p>Cart Items Not Found...!!</p>
+      }
       <!-- Continue Shopping -->
       <div class="mt-3">
         <button class="btn btn-outline-dark" [routerLink]="['/product']">← Continue Shopping</button>
