@@ -6,7 +6,8 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   router = inject(Router);
-  user = signal(JSON.parse(localStorage.getItem('USER') ?? '[]'));
+  private _user = signal(JSON.parse(localStorage.getItem('USER') ?? '[]'));
+  user=this._user.asReadonly()
   logOut() {
     if (confirm('Are You Want To logOut ? ')) {
       localStorage.removeItem('USER');
