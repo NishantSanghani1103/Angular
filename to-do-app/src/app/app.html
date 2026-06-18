@@ -22,7 +22,7 @@
           (click)="saveTask()"
           class="bg-blue-600 cursor-pointer hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium"
         >
-          {{ editIndex() ? 'Edit' : 'Add' }} Task
+          {{ editIndex()!==null ? 'Edit' : 'Add' }} Task
         </button>
       </div>
     </div>

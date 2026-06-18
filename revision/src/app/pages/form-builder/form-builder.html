@@ -6,7 +6,7 @@
       Student Registration Form
     </h2>
 
-    <form class="space-y-5">
+    <form [formGroup]="loginForm" (submit)="saveLogin()" class="space-y-5">
 
       <!-- Name -->
       <div>

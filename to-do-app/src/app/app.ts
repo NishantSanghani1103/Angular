@@ -13,7 +13,7 @@ export class App {
   editIndex = signal<number | null>(null);
   constructor() {
     effect(() => {
-      console.log(this.taskList());
+      console.log(this.editIndex());
     });
   }
   handleChange(event: any) {
@@ -24,13 +24,14 @@ export class App {
   saveTask() {
     if (this.taskValue()) {
       const checkTask = this.taskList().find((value, index) => value == this.taskValue());
-      console.log(checkTask);
+      // console.log(checkTask);
       if (checkTask) {
         return alert('Task Already Exists...');
       }
-      if (this.editIndex()) {
+      if (this.editIndex() !== null) {
+        // alert()
         this.taskList.update((value) =>
-          value.map((value, ind) => (ind == this.editIndex() ? this.taskValue() : value)),
+          value.map((value, ind) => (ind === this.editIndex() ? this.taskValue() : value)),
         );
 
         this.editIndex.set(null);
@@ -53,6 +54,8 @@ export class App {
   }
 
   editTask(index: number) {
+    // console.log(index);
+
     this.taskValue.set(this.taskList()[index]);
     this.editIndex.set(index);
   }

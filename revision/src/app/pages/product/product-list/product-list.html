@@ -1,0 +1,23 @@
+<div class="product-container">
+  @for (item of productData(); track $index) {
+    <div class="product-card">
+      <img [src]="item.thumbnail" alt="Product Image" class="product-image" />
+
+      <div class="product-content">
+        <h3 class="product-title">{{item.title}}</h3>
+
+        <p class="product-description">
+         {{item.description}}
+        </p>
+
+        <div class="product-price-section">
+          <span class="current-price">₹ {{item.price}}</span>
+          <!-- <span class="old-price">₹4,999</span> -->
+        </div>
+
+        <button class="add-cart-btn">Add to Cart</button>
+      </div>
+    </div>
+  }
+  
+</div>

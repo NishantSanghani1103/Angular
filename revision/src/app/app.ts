@@ -1,6 +1,8 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { form, FormField } from '@angular/forms/signals';
+import { Counter } from './pages/counter/counter';
+import { ProductList } from './pages/product/product-list/product-list';
 interface registerFormType {
   firstName: string;
   lastName: string;
@@ -29,7 +31,7 @@ interface Hobbies {
 }
 @Component({
   selector: 'app-root',
-  imports: [FormField],
+  imports: [FormField, Counter,ProductList],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })

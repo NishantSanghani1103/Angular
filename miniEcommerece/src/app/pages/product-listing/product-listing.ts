@@ -9,7 +9,8 @@ import { Brands, brandsApiResponse } from '../../models/brandModel';
 import { ProductFiltersType } from '../../models/filterProduct';
 import { BrandRow } from '../brand-row/brand-row';
 import { FormsModule } from '@angular/forms';
-import { firstValueFrom } from 'rxjs';
+import { firstValueFrom, lastValueFrom } from 'rxjs';
+import { ApiService } from '../../service/api.service';
 @Component({
   selector: 'app-product-listing',
   imports: [ProductRow, CategoryRow, BrandRow, FormsModule],
@@ -22,7 +23,7 @@ export class ProductListing {
   productData = signal<Product[]>([]);
   categoryData = signal<Category[]>([]);
   brandData = signal<Brands[]>([]);
-
+  loading = signal<boolean>(true);
   filterProduct = signal<ProductFiltersType>({
     categories: [],
     brands: [],
@@ -34,10 +35,12 @@ export class ProductListing {
     search: '',
   });
 
-  constructor() {
+  constructor(private apiService: ApiService) {
     effect(() => {
       this.getProduct(this.filterProduct());
-      this.getCategory();
+      this.getCategory()
+        .then((res) => this.categoryData.set(res.data))
+        .catch((error) => console.log(error));
       this.getBrand();
     });
   }
@@ -57,6 +60,7 @@ export class ProductListing {
       next: (res) => {
         // console.log(res.data);
         this.productData.set(res.data);
+        this.loading.set(false);
       },
       error: (error) => {
         console.log(error);
@@ -64,11 +68,36 @@ export class ProductListing {
     });
   }
 
-  async getCategory() {
-    // this.http.get<categoryApiResponse>(`${this.apiUrl()}/categories.php`).subscribe({
+  // async getCategory() {
+  //   // this.http.get<categoryApiResponse>(`${this.apiUrl()}/categories.php`).subscribe({
+  //   //   next: (res) => {
+  //   //     // console.log(res);
+  //   //     this.categoryData.set(res.data);
+  //   //   },
+  //   //   error: (error) => {
+  //   //     console.log(error);
+  //   //   },
+  //   // });
+
+  //   try {
+  //     const res = await lastValueFrom(
+  //       this.http.get<categoryApiResponse>(`${this.apiUrl()}/categories.php`),
+  //     );
+  //     this.categoryData.set(res.data);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }
+
+  getCategory(): Promise<categoryApiResponse> {
+    return lastValueFrom(this.http.get<categoryApiResponse>(`${this.apiUrl()}/categories.php`));
+  }
+
+  async getBrand() {
+    // this.http.get<brandsApiResponse>(`${this.apiUrl()}/brands.php`).subscribe({
     //   next: (res) => {
-    //     // console.log(res);
-    //     this.categoryData.set(res.data);
+    //     console.log(res);
+    //     this.brandData.set(res.data);
     //   },
     //   error: (error) => {
     //     console.log(error);
@@ -76,25 +105,13 @@ export class ProductListing {
     // });
 
     try {
-      const res = await firstValueFrom(
-        this.http.get<categoryApiResponse>(`${this.apiUrl()}/categories.php`),
-      );
-      this.categoryData.set(res.data);
+      const res = await this.apiService.request<Brands[]>('GET', 'brands.php');
+      console.log(res);
+      this.brandData.set(res.data ?? [])
     } catch (error) {
-      console.error(error);
+      console.log(error);
+      
     }
-  }
-
-  getBrand() {
-    this.http.get<brandsApiResponse>(`${this.apiUrl()}/brands.php`).subscribe({
-      next: (res) => {
-        console.log(res);
-        this.brandData.set(res.data);
-      },
-      error: (error) => {
-        console.log(error);
-      },
-    });
   }
 
   categoryChange(event: any) {

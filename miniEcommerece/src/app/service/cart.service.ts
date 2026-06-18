@@ -38,10 +38,13 @@ export class CartService {
           value.map((items, ind) => (items.id == id ? { ...items, qty: items.qty + 1 } : items)),
         );
     } else {
-      qty > 1 &&
+      qty > 1 
+      ?
         this.cartItems.update((value) =>
           value.map((items, ind) => (items.id == id ? { ...items, qty: items.qty - 1 } : items)),
-        );
+        )
+        :
+        this.removeCart(id)
     }
     localStorage.setItem('CART', JSON.stringify(this.cartItems()));
   }
