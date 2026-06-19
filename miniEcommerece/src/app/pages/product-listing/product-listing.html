@@ -91,18 +91,15 @@
           <option>Popular</option>
         </select> -->
       </div>
-      @if (loading()) {
-        <p>Loading....</p>
-      } @else {
-        <!-- Products -->
-        <div class="row g-4">
-          @for (item of productData(); track item.id) {
-            <div class="col-lg-4 col-md-6">
-              <app-product-row [pData]="item"></app-product-row>
-            </div>
-          }
-        </div>
-      }
+
+      <!-- Products -->
+      <div class="row g-4">
+        @for (item of productData(); track item.id) {
+          <div class="col-lg-4 col-md-6">
+            <app-product-row [pData]="item"></app-product-row>
+          </div>
+        }
+      </div>
     </div>
   </div>
 </div>

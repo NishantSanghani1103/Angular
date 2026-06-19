@@ -4,7 +4,9 @@ import { user } from '../../../data/user';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
-import { ValidationError } from "../../common/validation-error/validation-error";
+import { ValidationError } from '../../common/validation-error/validation-error';
+import { ApiService } from '../../service/api.service';
+import { LoginResType } from '../../models/loginModel';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +21,7 @@ export class Login {
     public toast: ToastrService,
     public router: Router,
     private authService: AuthService,
+    public apiService: ApiService,
   ) {}
   ngOnInit() {
     this.initializeForm();
@@ -33,27 +36,35 @@ export class Login {
     return this.loginForm.controls;
   }
 
-  loginData() {
+  async loginData() {
     if (this.loginForm.valid) {
       console.log(this.loginForm.value);
-      const { email, password } = this.loginForm.value;
-      const checkuser = user.find((value, index) => value.email == email);
-      if (checkuser) {
-        if (checkuser.password == password) {
-          this.toast.success('Logged In Successfully...!!');
-          localStorage.setItem('USER', JSON.stringify(checkuser));
+      try {
+        const res = await this.apiService.request<LoginResType>(
+          'POST',
+          'auth/login',
+          this.loginForm.value,
+          null,
+          {
+            showLoader: true,
+            showToaster: true,
+            useToken: true,
+          },
+        );
+        // console.log(res);
+        if (res.status) {
+          localStorage.setItem('USER', JSON.stringify(res.data));
+          localStorage.setItem('TOKEN', res['token']);
           setTimeout(() => {
-            if (checkuser.role == 'admin') {
+            if (res.data?.role == 'ADMIN') {
               this.router.navigate(['/admin/dashboard']);
             } else {
               this.router.navigate(['/home']);
             }
           }, 2000);
-        } else {
-          this.toast.error("Password Doesn't Matched....!!");
         }
-      } else {
-        this.toast.error("User Doesn't Exists....!!");
+      } catch (error) {
+        console.log(error);
       }
     }
   }

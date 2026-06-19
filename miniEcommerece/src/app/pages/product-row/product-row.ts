@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, signal } from '@angular/core';
 import { Product } from '../../models/product.model/product.model';
 import { CartService } from '../../service/cart.service';
+import { ApiService } from '../../service/api.service';
 
 @Component({
   selector: 'app-product-row',
@@ -12,38 +13,51 @@ export class ProductRow implements OnInit {
   @Input() pData!: Product;
   isInCart = signal(false);
 
-  constructor(private cart: CartService) {}
+  constructor(
+    public cart: CartService,
+    private apiService: ApiService,
+  ) {}
 
   ngOnInit() {
-    this.checkIfInCart();
+    // this.checkIfInCart();
   }
 
-  checkIfInCart() {
-    const checkInCart = this.cart
-      .cartItems()
-      .find((value) => value.id === Number(this.pData.id));
-    if (checkInCart) {
-      this.isInCart.set(true);
-    } else {
-      this.isInCart.set(false);
-    }
-  }
+  // checkIfInCart() {
+  //   const checkInCart = this.cart.cartItems().find((value) => value.id === Number(this.pData.id));
+  //   if (checkInCart) {
+  //     this.isInCart.set(true);
+  //   } else {
+  //     this.isInCart.set(false);
+  //   }
+  // }
 
-  addToCart() {
-    console.log(this.pData);
-    const cartObj = {
-      id: Number(this.pData.id),
-      name: this.pData.name,
-      image: this.pData.image,
-      price: Number(this.pData.price),
-      qty: 1,
-    };
-    this.cart.addToCart(cartObj);
-    this.checkIfInCart();
-  }
+  // async addToCart() {
+  //   const obj = {
+  //     productId: this.pData.id,
+  //     quantity: 1,
+  //     productPrice: this.pData.price,
+  //   };
+  //   const res = await this.apiService.request('POST', 'cart/add', obj, {
+  //     showToaster: true,
+  //     useToken: true,
+  //   });
+
+  //   console.log(res);
+
+  //   // console.log(this.pData);
+  //   // const cartObj = {
+  //   //   id: Number(this.pData.id),
+  //   //   name: this.pData.name,
+  //   //   image: this.pData.imagesUrl[0] ,
+  //   //   price: Number(this.pData.price),
+  //   //   qty: 1,
+  //   // };
+  //   // this.cart.addToCart(cartObj);
+  //   // this.checkIfInCart();
+  // }
 
   removeFromCart() {
-    this.cart.removeCart(Number(this.pData.id));
-    this.checkIfInCart();
+    // this.cart.removeCart(Number(this.pData.id));
+    // this.checkIfInCart();
   }
 }

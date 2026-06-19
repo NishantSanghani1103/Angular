@@ -1,69 +1,67 @@
 <div class="card">
-  <div class="card-header">
-    Add Product
-  </div>
+  <div class="card-header">Add Product</div>
 
   <div class="card-body">
-
-    <form>
-
+    <form (submit)="productSave()" [formGroup]="productForm">
       <div class="mb-3">
-        <label class="form-label">
-          Product Name
-        </label>
+        <label class="form-label"> Product Name </label>
 
-        <input
-          type="text"
-          class="form-control">
+        <input formControlName="name" type="text" class="form-control" />
+
+        <app-validation-error [control]="f['name']" label="name"></app-validation-error>
       </div>
 
       <div class="mb-3">
-        <label class="form-label">
-          Category
-        </label>
+        <label class="form-label"> Category </label>
 
-        <select class="form-select">
-          <option>Electronics</option>
-          <option>Fashion</option>
-          <option>Books</option>
+        <select formControlName="categoryId" class="form-select">
+          <option value="">--Select Category--</option>
+          @for (item of categoryData(); track item.id) {
+            <option [value]="item.id">{{ item.name }}</option>
+          }
         </select>
+        <app-validation-error [control]="f['categoryId']" label="categoryId"></app-validation-error>
       </div>
 
       <div class="mb-3">
-        <label class="form-label">
-          Price
-        </label>
+        <label class="form-label"> Price </label>
 
-        <input
-          type="number"
-          class="form-control">
+        <input formControlName="price" type="number" class="form-control" />
+
+        <app-validation-error [control]="f['price']" label="price"></app-validation-error>
       </div>
 
       <div class="mb-3">
-        <label class="form-label">
-          Product Image
-        </label>
+        <label class="form-label"> Stock </label>
+
+        <input formControlName="stock" type="number" class="form-control" />
+
+        <app-validation-error [control]="f['stock']" label="stock"></app-validation-error>
+      </div>
+      <div class="mb-3">
+        <label class="form-label"> Product Image </label>
 
         <input
           type="file"
-          class="form-control">
+          class="form-control"
+          multiple
+          accept="image/*"
+          (change)="onImageSelect($event)"
+        />
       </div>
 
       <div class="mb-3">
-        <label class="form-label">
-          Description
-        </label>
+        <label class="form-label"> Description </label>
 
-        <textarea
-          rows="4"
-          class="form-control"></textarea>
+        <textarea formControlName="description" rows="4" class="form-control"></textarea>
+
+        <app-validation-error
+          [control]="f['description']"
+          label="description"
+        ></app-validation-error>
       </div>
 
-      <button class="btn btn-primary">
-        Add Product
-      </button>
-
+      <button type="submit" class="btn btn-primary">Add Product</button>
     </form>
-
   </div>
 </div>

@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, effect, inject, signal } from '@angular/core';
 import { apiBaseUrl } from '../../../environment/environment';
-import { Product, ProductApiResponse } from '../../models/product.model/product.model';
+import { Product } from '../../models/product.model/product.model';
 import { ProductRow } from '../product-row/product-row';
 import { Category, categoryApiResponse } from '../../models/category.model';
 import { CategoryRow } from '../category-row/category-row';
@@ -24,6 +24,7 @@ export class ProductListing {
   categoryData = signal<Category[]>([]);
   brandData = signal<Brands[]>([]);
   loading = signal<boolean>(true);
+  private initialized = false;
   filterProduct = signal<ProductFiltersType>({
     categories: [],
     brands: [],
@@ -37,36 +38,44 @@ export class ProductListing {
 
   constructor(private apiService: ApiService) {
     effect(() => {
-      this.getProduct(this.filterProduct());
-      this.getCategory()
-        .then((res) => this.categoryData.set(res.data))
-        .catch((error) => console.log(error));
-      this.getBrand();
+      this.filterProduct();
+
+      if (!this.initialized) {
+        this.initialized = true;
+        return;
+      }
+
+      this.getProduct();
     });
+  }
+  ngOnInit() {
+    this.getProduct();
+    this.getCategory();
+    this.getBrand();
   }
 
-  getProduct(filter: any) {
-    let params = new HttpParams();
-    if (filter.categories) {
-      params = params.set('categories', filter.categories.join(','));
-    }
-    if (filter.brands) {
-      params = params.set('brands', filter.brands.join(','));
-    }
-    if (filter.price_from && filter.price_to) {
-      params = params.set('price_from', filter.price_from).set('price_to', filter.price_to);
-    }
-    this.http.get<ProductApiResponse>(`${this.apiUrl()}/products.php`, { params }).subscribe({
-      next: (res) => {
-        // console.log(res.data);
-        this.productData.set(res.data);
-        this.loading.set(false);
-      },
-      error: (error) => {
-        console.log(error);
-      },
-    });
-  }
+  // getProduct(filter: any) {
+  //   let params = new HttpParams();
+  //   if (filter.categories) {
+  //     params = params.set('categories', filter.categories.join(','));
+  //   }
+  //   if (filter.brands) {
+  //     params = params.set('brands', filter.brands.join(','));
+  //   }
+  //   if (filter.price_from && filter.price_to) {
+  //     params = params.set('price_from', filter.price_from).set('price_to', filter.price_to);
+  //   }
+  //   this.http.get<ProductApiResponse>(`${this.apiUrl()}/products.php`, { params }).subscribe({
+  //     next: (res) => {
+  //       // console.log(res.data);
+  //       this.productData.set(res.data);
+  //       this.loading.set(false);
+  //     },
+  //     error: (error) => {
+  //       console.log(error);
+  //     },
+  //   });
+  // }
 
   // async getCategory() {
   //   // this.http.get<categoryApiResponse>(`${this.apiUrl()}/categories.php`).subscribe({
@@ -89,29 +98,47 @@ export class ProductListing {
   //   }
   // }
 
-  getCategory(): Promise<categoryApiResponse> {
-    return lastValueFrom(this.http.get<categoryApiResponse>(`${this.apiUrl()}/categories.php`));
+  async getProduct() {
+    const res = await this.apiService.request<Product[]>(
+      'GET',
+      'product/view',
+      null,
+      {
+        categoryId: this.filterProduct().categories.join(','),
+      },
+      {
+        showLoader: true,
+        showToaster: false,
+      },
+    );
+    this.productData.set(res.data ?? []);
+    console.log(res);
+  }
+
+  async getCategory() {
+    // return lastValueFrom(this.http.get<categoryApiResponse>(`${this.apiUrl()}/categories.php`));
+    try {
+      const res = await this.apiService.request<Category[]>('GET', 'category/view', null, null, {
+        showLoader: true,
+        showToaster: false,
+      });
+      // console.log(res);
+      this.categoryData.set(res.data ?? []);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async getBrand() {
-    // this.http.get<brandsApiResponse>(`${this.apiUrl()}/brands.php`).subscribe({
-    //   next: (res) => {
-    //     console.log(res);
-    //     this.brandData.set(res.data);
-    //   },
-    //   error: (error) => {
-    //     console.log(error);
-    //   },
-    // });
-
-    try {
-      const res = await this.apiService.request<Brands[]>('GET', 'brands.php');
-      console.log(res);
-      this.brandData.set(res.data ?? [])
-    } catch (error) {
-      console.log(error);
-      
-    }
+    this.http.get<brandsApiResponse>(`${this.apiUrl()}/brands.php`).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.brandData.set(res.data);
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
   }
 
   categoryChange(event: any) {

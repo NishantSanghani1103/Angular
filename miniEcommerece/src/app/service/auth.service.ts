@@ -11,6 +11,7 @@ export class AuthService {
   logOut() {
     if (confirm('Are You Want To logOut ? ')) {
       localStorage.removeItem('USER');
+      localStorage.removeItem('TOKEN');
       this.router.navigate(['/']);
     }
   }

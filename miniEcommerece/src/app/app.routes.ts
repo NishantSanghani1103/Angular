@@ -30,7 +30,7 @@ export const routes: Routes = [
     component: MainLayout,
     canActivate: [authGuardGuard],
     data: {
-      roles: ['user'],
+      roles: ['CUSTOMER'],
     },
     children: [
       {
@@ -58,7 +58,7 @@ export const routes: Routes = [
     component: AdminLayout,
     canActivate: [authGuardGuard],
     data: {
-      roles: ['admin'],
+      roles: ['ADMIN'],
     },
     children: [
       {
