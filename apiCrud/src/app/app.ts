@@ -3,10 +3,11 @@ import { RouterOutlet } from '@angular/router';
 import { Product } from './service/productType';
 import { ProductService } from './service/product.service';
 import { ProductRow } from './pages/product-row/product-row';
+import { Loader } from './common/loader/loader';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,ProductRow],
+  imports: [RouterOutlet, ProductRow, Loader],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
@@ -15,10 +16,9 @@ export class App {
   productData = signal<Product[]>([]);
 
   constructor(private productService: ProductService) {
-    effect(()=>{
+    effect(() => {
       console.log(this.productData());
-      
-    })
+    });
   }
   ngOnInit() {
     this.productService.getProducts().subscribe((data) => {

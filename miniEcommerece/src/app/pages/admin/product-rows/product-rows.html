@@ -1,0 +1,15 @@
+<td>{{ index + 1 }}</td>
+
+<td>
+  <img [src]="pData.imagesUrl[0]" width="60" />
+</td>
+
+<td>{{ pData.name }}</td>
+<td>{{ pData.category.name }}</td>
+<td>₹ {{ pData.price }}</td>
+<td>{{ pData.stock }}</td>
+<td>
+  <button (click)="editProduct(pData.slug)" class="btn btn-warning btn-sm me-2">Edit</button>
+
+  <button (click)="deleteProduct(pData.id)" class="btn btn-danger btn-sm">Delete</button>
+</td>

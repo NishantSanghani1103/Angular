@@ -1,0 +1,157 @@
+<div class="container py-5">
+  <!-- Page Header -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <h2 class="fw-bold mb-1">My Orders</h2>
+      <p class="text-muted mb-0">View and track your previous orders</p>
+    </div>
+    <button class="btn btn-primary">Continue Shopping</button>
+  </div>
+
+  <!-- Order Card 1 -->
+  @for (order of orderData(); track order.id) {
+    <div class="card shadow-sm border-0 mb-4">
+      <div class="card-header bg-light py-3">
+        <div class="row align-items-center">
+          <div class="col-md-3">
+            <small class="text-muted d-block">Order ID</small>
+            <strong class="text-uppercase">#ORD-{{ order.id.split('-')[0] }}</strong>
+          </div>
+          <div class="col-md-3">
+            <small class="text-muted d-block">Order Date</small>
+            <strong>{{ order.createdAt | date }}</strong>
+          </div>
+          <div class="col-md-3">
+            <small class="text-muted d-block">Total Amount</small>
+            <strong>₹ {{ order.totalAmount }}</strong>
+          </div>
+          <div class="col-md-3 text-md-end mt-3 mt-md-0">
+            <span
+              [ngClass]="{
+                'bg-danger': order.status == 'cancelled',
+                'bg-success': order.status == 'delivered',
+                'bg-warning': order.status == 'pending',
+                'bg-secondary': order.status == 'shipped',
+              }"
+              class="badge px-3 py-2 text-capitalize"
+            >
+              {{ order.status }}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-body">
+        @for (product of order.items; track product.product.id) {
+          <div class="row align-items-center mb-3">
+            <div class="col-md-2">
+              <img
+                [src]="product.product.imagesUrl[0]"
+                class="img-fluid rounded border"
+                alt="Product"
+              />
+            </div>
+
+            <div class="col-md-6">
+              <h6 class="fw-semibold mb-1">{{ product.product.name }}</h6>
+              <small class="text-muted"> Quantity: {{ product.quantity }} </small>
+            </div>
+
+            <div class="col-md-2 text-md-center mt-3 mt-md-0">
+              <strong>₹{{ +product.product.price * product.quantity }}</strong>
+            </div>
+          </div>
+          <hr />
+        }
+
+        <!-- <div class="row align-items-center">
+          <div class="col-md-2">
+            <img
+              src="https://via.placeholder.com/120"
+              class="img-fluid rounded border"
+              alt="Product"
+            />
+          </div>
+
+          <div class="col-md-6">
+            <h6 class="fw-semibold mb-1">AirPods Pro (2nd Generation)</h6>
+            <p class="text-muted mb-1">Wireless Earbuds</p>
+            <small class="text-muted"> Quantity: 1 </small>
+          </div>
+
+          <div class="col-md-2 text-md-center mt-3 mt-md-0">
+            <strong>₹19,999</strong>
+          </div>
+        </div> -->
+      </div>
+    </div>
+  }
+
+  <!-- Order Card 2 -->
+  <!-- <div class="card shadow-sm border-0 mb-4">
+    <div class="card-header bg-light py-3">
+      <div class="row align-items-center">
+        <div class="col-md-3">
+          <small class="text-muted d-block">Order ID</small>
+          <strong>#ORD-102125</strong>
+        </div>
+        <div class="col-md-3">
+          <small class="text-muted d-block">Order Date</small>
+          <strong>10 June 2026</strong>
+        </div>
+        <div class="col-md-3">
+          <small class="text-muted d-block">Total Amount</small>
+          <strong>₹5,999</strong>
+        </div>
+        <div class="col-md-3 text-md-end mt-3 mt-md-0">
+          <span class="badge bg-warning text-dark px-3 py-2">
+            Processing
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-body">
+
+      <div class="row align-items-center">
+        <div class="col-md-2">
+          <img
+            src="https://via.placeholder.com/120"
+            class="img-fluid rounded border"
+            alt="Product">
+        </div>
+
+        <div class="col-md-6">
+          <h6 class="fw-semibold mb-1">
+            Samsung Galaxy Watch
+          </h6>
+          <p class="text-muted mb-1">
+            Black Edition
+          </p>
+          <small class="text-muted">
+            Quantity: 1
+          </small>
+        </div>
+
+        <div class="col-md-2 text-md-center mt-3 mt-md-0">
+          <strong>₹5,999</strong>
+        </div>
+
+ 
+      </div>
+
+    </div>
+  </div> -->
+
+  <!-- Empty State Example -->
+  @empty {
+    <div class="card border-0 shadow-sm text-center py-5">
+      <div class="card-body">
+        <div style="font-size: 60px">📦</div>
+        <h4 class="mt-3">No Orders Found</h4>
+        <p class="text-muted">Looks like you haven't placed any orders yet.</p>
+        <button class="btn btn-primary">Start Shopping</button>
+      </div>
+    </div>
+  }
+</div>

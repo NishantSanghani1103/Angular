@@ -3,6 +3,9 @@ import { ApiService } from '../../../service/api.service';
 import { Category } from '../../../models/category.model';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ValidationError } from '../../../common/validation-error/validation-error';
+import { ActivatedRoute } from '@angular/router';
+import { Product } from '../../../models/product.model/product.model';
+import { ApiResponse } from '../../../models/ApiType';
 
 @Component({
   selector: 'app-product-add',
@@ -13,13 +16,22 @@ import { ValidationError } from '../../../common/validation-error/validation-err
 export class ProductAdd {
   apiService = inject(ApiService);
   fb = inject(FormBuilder);
+  activatedRoutes = inject(ActivatedRoute);
   categoryData = signal<Category[]>([]);
+  pId = signal<string>('');
+  productId = signal<string>('');
   productForm!: FormGroup;
   selectedFiles: File[] = [];
 
   ngOnInit() {
     this.initializeForm();
     this.getCategory();
+    const id = this.activatedRoutes.snapshot.paramMap.get('slug');
+    console.log(id);
+    this.pId.set(id ?? '');
+    if (this.pId()) {
+      this.singleProductView();
+    }
   }
 
   initializeForm() {
@@ -63,14 +75,28 @@ export class ProductAdd {
       this.selectedFiles.forEach((file) => {
         formData.append('images', file);
       });
+      let res: ApiResponse;
+      if (this.pId()) {
+        res = await this.apiService.request<Product>(
+          'PUT',
+          `product/edit/${this.productId()}`,
+          formData,
+          null,
+          {
+            showLoader: true,
+            showToaster: true,
+            useToken: true,
+          },
+        );
+      } else {
+        res = await this.apiService.request<Product>('POST', 'product/add', formData, null, {
+          showLoader: true,
+          showToaster: true,
+          useToken: true,
+        });
 
-      const res = await this.apiService.request<any>('POST', 'product/add', formData, null, {
-        showLoader: true,
-        showToaster: true,
-        useToken: true,
-      });
-
-      console.log(res);
+        console.log(res);
+      }
     }
   }
 
@@ -80,5 +106,28 @@ export class ProductAdd {
     });
 
     this.categoryData.set(res.data ?? []);
+  }
+
+  async singleProductView() {
+    const res = await this.apiService.request<Product>(
+      'GET',
+      `product/view/${this.pId()}`,
+      null,
+      null,
+      {
+        showLoader: true,
+      },
+    );
+    console.log(res);
+    if (res.status) {
+      this.productForm.patchValue({
+        name: res.data?.name,
+        price: res.data?.price,
+        stock: res.data?.stock,
+        categoryId: res.data?.categoryId,
+        description: res.data?.description,
+      });
+      this.productId.set(res.data?.id ?? '');
+    }
   }
 }

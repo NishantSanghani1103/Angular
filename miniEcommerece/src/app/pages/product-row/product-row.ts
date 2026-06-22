@@ -1,11 +1,13 @@
-import { Component, Input, OnInit, signal } from '@angular/core';
+import { Component, computed, Input, OnInit, signal } from '@angular/core';
 import { Product } from '../../models/product.model/product.model';
 import { CartService } from '../../service/cart.service';
 import { ApiService } from '../../service/api.service';
+import { RouterLink } from '@angular/router';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-product-row',
-  imports: [],
+  imports: [RouterLink, NgClass],
   templateUrl: './product-row.html',
   styleUrl: './product-row.css',
 })
@@ -17,7 +19,9 @@ export class ProductRow implements OnInit {
     public cart: CartService,
     private apiService: ApiService,
   ) {}
-
+  checkCart = computed(() =>
+    this.cart.cartItems().some((value) => value.productId == this.pData?.id),
+  );
   ngOnInit() {
     // this.checkIfInCart();
   }

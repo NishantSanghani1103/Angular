@@ -14,6 +14,8 @@ import { authGuardGuard } from './auth-guard-guard';
 import { UnAuthorized } from './common/un-authorized/un-authorized';
 import { loginGuard } from './login-guard';
 import { OrderView } from './pages/admin/order-view/order-view';
+import { CheckOut } from './pages/check-out/check-out';
+import { Orders } from './pages/orders/orders';
 
 export const routes: Routes = [
   {
@@ -38,7 +40,7 @@ export const routes: Routes = [
         component: ProductListing,
       },
       {
-        path: 'product/:id',
+        path: 'product/:slug',
         component: ProductDetails,
       },
       {
@@ -48,6 +50,14 @@ export const routes: Routes = [
       {
         path: 'home',
         component: Home,
+      },
+      {
+        path: 'checkout',
+        component: CheckOut,
+      },
+      {
+        path: 'orders',
+        component: Orders,
       },
     ],
   },
@@ -63,7 +73,6 @@ export const routes: Routes = [
     children: [
       {
         path: 'dashboard',
-
         component: Dashboard,
       },
       {
@@ -75,6 +84,10 @@ export const routes: Routes = [
         children: [
           {
             path: 'add',
+            component: ProductAdd,
+          },
+          {
+            path: 'edit/:slug',
             component: ProductAdd,
           },
           {

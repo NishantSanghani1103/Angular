@@ -1,0 +1,19 @@
+.card {
+  border-radius: 15px;
+}
+
+.card-header {
+  border-bottom: 1px solid #ececec;
+}
+
+.badge {
+  font-size: 0.85rem;
+}
+
+.btn {
+  border-radius: 8px;
+}
+
+img {
+  object-fit: cover;
+}

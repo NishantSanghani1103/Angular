@@ -32,6 +32,16 @@
           >Products</a
         >
       </li>
+
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          routerLink="/orders"
+          >Orders</a
+        >
+      </li>
     </ul>
 
     <form class="d-flex me-3">
@@ -41,12 +51,11 @@
 
     <div class="d-flex align-items-center text-white">
       @if (auth.user()) {
-        <span 
-        (click)="auth.logOut()"
-        class="me-3" style="cursor: pointer" routerLink="/">LogOut</span>
-      }
-      @else {
-         <span class="me-3" style="cursor: pointer" routerLink="/">LogIn</span>
+        <span (click)="auth.logOut()" class="me-3" style="cursor: pointer" routerLink="/"
+          >LogOut</span
+        >
+      } @else {
+        <span class="me-3" style="cursor: pointer" routerLink="/">LogIn</span>
       }
       <button routerLink="/cart" class="btn btn-warning position-relative">
         Cart

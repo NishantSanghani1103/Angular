@@ -1,4 +1,4 @@
-import { Component, effect, signal } from '@angular/core';
+import { Component, computed, effect, signal } from '@angular/core';
 import { CartService } from '../../service/cart.service';
 // import { CartItemType } from '../../models/cartType';
 import { CartRow } from '../cart-row/cart-row';
@@ -8,18 +8,20 @@ import { CartItemType } from '../../models/cartType';
 
 @Component({
   selector: 'app-cart',
-  imports: [RouterLink, CartRow],
+  imports: [RouterLink, CartRow,RouterLink],
   templateUrl: './cart.html',
   styleUrl: './cart.css',
 })
 export class Cart {
   cartData = signal<CartItemType[]>([]);
+  total = computed(() =>
+    this.cart.cartItems().reduce((acc, cuu) => acc + cuu.quantity * Number(cuu.productPrice), 0),
+  );
   constructor(
     public cart: CartService,
     private apiService: ApiService,
   ) {}
   async ngOnInit() {
-
     this.cart.viewCart();
   }
 }

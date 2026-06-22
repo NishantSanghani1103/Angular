@@ -15,7 +15,10 @@ import { CartItemType } from '../models/cartType';
 })
 export class CartService {
   cartItems = signal<CartItemType[]>([]);
-
+  isInCart = signal<boolean>(false);
+  cartTotal = computed(() =>
+    this.cartItems().reduce((acc, cuu) => acc + Number(cuu.productPrice) * cuu.quantity, 0),
+  );
   constructor(
     private toast: ToastrService,
     private apiService: ApiService,
@@ -30,7 +33,7 @@ export class CartService {
     const res = await this.apiService.request<any>('POST', 'cart/add', obj, null, {
       showToaster: true,
       useToken: true,
-      showLoader:true
+      showLoader: true,
     });
     console.log(res.data.createCartItems);
     this.cartItems.update((value) => [...value, res.data.createCartItems]);

@@ -2,44 +2,35 @@
   <h2 class="mb-4">Dashboard</h2>
 
   <div class="row">
-    <div class="col-md-3 mb-3">
+    <div class="col-md-4 mb-3">
       <div class="card bg-primary text-white">
         <div class="card-body">
           <h5>Total Products</h5>
-          <h2>120</h2>
+          <h2>{{countItems().productCount}}</h2>
         </div>
       </div>
     </div>
 
-    <div class="col-md-3 mb-3">
+    <div class="col-md-4 mb-3">
       <div class="card bg-success text-white">
         <div class="card-body">
           <h5>Total Orders</h5>
-          <h2>540</h2>
+          <h2>{{countItems().orderCount}}</h2>
         </div>
       </div>
     </div>
 
-    <div class="col-md-3 mb-3">
-      <div class="card bg-warning text-dark">
-        <div class="card-body">
-          <h5>Pending Orders</h5>
-          <h2>18</h2>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-3 mb-3">
+    <div class="col-md-4 mb-3">
       <div class="card bg-danger text-white">
         <div class="card-body">
           <h5>Total Users</h5>
-          <h2>200</h2>
+          <h2>{{countItems().customerRes}}</h2>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="card mt-4">
+  <!-- <div class="card mt-4">
     <div class="card-header">Recent Orders</div>
 
     <div class="card-body">
@@ -74,5 +65,5 @@
         </tbody>
       </table>
     </div>
-  </div>
+  </div> -->
 </div>

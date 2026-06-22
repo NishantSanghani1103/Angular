@@ -1,5 +1,5 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Component, effect, inject, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import { apiBaseUrl } from '../../../environment/environment';
 import { Product } from '../../models/product.model/product.model';
 import { ProductRow } from '../product-row/product-row';
@@ -11,6 +11,7 @@ import { BrandRow } from '../brand-row/brand-row';
 import { FormsModule } from '@angular/forms';
 import { firstValueFrom, lastValueFrom } from 'rxjs';
 import { ApiService } from '../../service/api.service';
+import { CartService } from '../../service/cart.service';
 @Component({
   selector: 'app-product-listing',
   imports: [ProductRow, CategoryRow, BrandRow, FormsModule],
@@ -19,6 +20,7 @@ import { ApiService } from '../../service/api.service';
 })
 export class ProductListing {
   http = inject(HttpClient);
+  cartService=inject(CartService)
   apiUrl = signal<string>(apiBaseUrl);
   productData = signal<Product[]>([]);
   categoryData = signal<Category[]>([]);
@@ -35,6 +37,8 @@ export class ProductListing {
     page: 1,
     search: '',
   });
+
+  // isInCart=computed((this.cartService))
 
   constructor(private apiService: ApiService) {
     effect(() => {

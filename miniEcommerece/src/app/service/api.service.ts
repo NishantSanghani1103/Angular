@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ApiResponse } from '../models/ApiType';
 import { apiBaseUrl, baseUrl } from '../../environment/environment';
-import { lastValueFrom } from 'rxjs';
+import { count, lastValueFrom } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { LoaderService } from './loader.service';
 
@@ -15,7 +15,7 @@ export class ApiService {
     showLoader: false,
     useToken: false,
   };
-  private isLoggingOut: boolean = false;
+
   constructor(
     private http: HttpClient,
     public toast: ToastrService,
@@ -29,12 +29,14 @@ export class ApiService {
     params?: any,
     apiOption: Partial<typeof this.apiOptions> = this.apiOptions,
   ): Promise<ApiResponse<T>> {
+    console.log(params);
+    
     const url = `${this.baseUrl}/${endpoint}`;
-    console.log(url);
+    // console.log(url);
     const mergedOption = { ...this.apiOptions, ...apiOption };
-    console.log(mergedOption);
+    // console.log(mergedOption);
 
-    console.log(mergedOption);
+    // console.log(mergedOption);
     if (mergedOption.showLoader) {
       this.loader.show();
     }
@@ -42,7 +44,7 @@ export class ApiService {
     if (mergedOption.useToken) {
       token = localStorage.getItem('TOKEN');
     }
-    console.log(token);
+    // console.log(token);
 
     const isFormData = body instanceof FormData;
 
@@ -58,7 +60,7 @@ export class ApiService {
       headersObj['Authorization'] = `Bearer ${token}`;
     }
     const headers = new HttpHeaders(headersObj);
-    console.log(headers);
+    // console.log(headers);
 
     try {
       let response: any;
@@ -70,7 +72,7 @@ export class ApiService {
           response = await lastValueFrom(this.http.post<ApiResponse<T>>(url, body, { headers }));
           break;
         case 'PUT':
-          response = await lastValueFrom(this.http.put<ApiResponse<T>>(url, body, { headers }));
+          response = await lastValueFrom(this.http.put<ApiResponse<T>>(url, body, { headers,params }));
           break;
         case 'DELETE':
           response = await lastValueFrom(this.http.delete<ApiResponse<T>>(url, { headers }));
@@ -78,6 +80,8 @@ export class ApiService {
         default:
           throw new Error('Invalid Method');
       }
+      console.log(response);
+      
       let resp: any = {
         message: response.message,
         code: response.code,
@@ -85,6 +89,7 @@ export class ApiService {
         data: response.data,
         error: response.error,
         token: response.token,
+        count: response.count,
       };
 
       if (mergedOption.showToaster) {

@@ -1,0 +1,185 @@
+<section class="checkout-page">
+  <div class="container py-5">
+    <form (submit)="orderSave()" [formGroup]="shippingForm">
+      <div class="row g-4">
+        <div class="col-lg-7">
+          <div class="checkout-card p-4">
+            <h3 class="mb-4">Shipping Details</h3>
+
+            <div class="row g-3">
+              <div class="col-md-4">
+                <label class="form-label">First Name</label>
+                <input
+                  formControlName="firstName"
+                  type="text"
+                  class="form-control"
+                  placeholder="John"
+                />
+                <app-validation-error
+                  [control]="f['firstName']"
+                  label="firstName"
+                ></app-validation-error>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Last Name</label>
+                <input
+                  formControlName="lastName"
+                  type="text"
+                  class="form-control"
+                  placeholder="Doe"
+                />
+                <app-validation-error
+                  [control]="f['lastName']"
+                  label="lastName"
+                ></app-validation-error>
+              </div>
+              <div class="col-12">
+                <label class="form-label">Email Address</label>
+                <input
+                  formControlName="email"
+                  type="email"
+                  class="form-control"
+                  placeholder="john@example.com"
+                />
+                <app-validation-error [control]="f['email']" label="email"></app-validation-error>
+              </div>
+              <div class="col-12">
+                <label class="form-label">Phone Number</label>
+                <input
+                  type="text"
+                  formControlName="phone"
+                  class="form-control"
+                  placeholder="+91 98765 43210"
+                />
+                <app-validation-error [control]="f['phone']" label="phone"></app-validation-error>
+              </div>
+              <div class="col-12">
+                <label class="form-label">Address</label>
+                <input
+                  type="text"
+                  formControlName="address"
+                  class="form-control"
+                  placeholder="123, Market Street"
+                />
+                <app-validation-error
+                  [control]="f['address']"
+                  label="address"
+                ></app-validation-error>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">City</label>
+                <input
+                  formControlName="city"
+                  type="text"
+                  class="form-control"
+                  placeholder="Ahmedabad"
+                />
+                <app-validation-error [control]="f['city']" label="city"></app-validation-error>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">Postcode</label>
+                <input
+                  formControlName="postalCode"
+                  type="text"
+                  class="form-control"
+                  placeholder="380001"
+                />
+                <app-validation-error
+                  [control]="f['postalCode']"
+                  label="postalCode"
+                ></app-validation-error>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">Country</label>
+                <input
+                  formControlName="country"
+                  type="text"
+                  class="form-control"
+                  placeholder="380001"
+                />
+                <app-validation-error
+                  [control]="f['country']"
+                  label="country"
+                ></app-validation-error>
+              </div>
+            </div>
+
+            <div class="mt-4">
+              <h5 class="mb-3">Payment Method</h5>
+
+              <div class="form-check mb-2">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  formControlName="paymentMethod"
+                  id="creditCard"
+                  value="creditCard"
+                />
+                <label class="form-check-label" for="creditCard"> 💳 Credit Card </label>
+              </div>
+
+              <div class="form-check mb-2">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  formControlName="paymentMethod"
+                  id="upi"
+                  value="upi"
+                />
+                <label class="form-check-label" for="upi"> 📱 UPI </label>
+              </div>
+
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  formControlName="paymentMethod"
+                  id="cod"
+                  value="cod"
+                />
+                <label class="form-check-label" for="cod"> 💵 Cash on Delivery </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-5">
+          <div class="checkout-card summary-card p-4">
+            <h3 class="mb-4">Order Summary</h3>
+            @for (item of cartService.cartItems(); track item.id) {
+              <div class="summary-item">
+                <div>
+                  <h6>{{ item.product.name }}</h6>
+                  <small>Qty: {{ item.quantity }}</small>
+                </div>
+                <span>₹ {{ item.productPrice }}</span>
+              </div>
+            }
+
+            <div class="summary-divider"></div>
+
+            <div class="summary-line">
+              <span>Subtotal</span>
+              <span>₹ 0</span>
+            </div>
+            <div class="summary-line">
+              <span>Shipping</span>
+              <span>₹ 0</span>
+            </div>
+            <div class="summary-line">
+              <span>Tax</span>
+              <span>₹ 0</span>
+            </div>
+
+            <div class="summary-total">
+              <span>Total</span>
+              <span>₹ {{ cartService.cartTotal() }}</span>
+            </div>
+
+            <button class="btn btn-primary w-100 mt-3 place-order-btn">Place Order</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>

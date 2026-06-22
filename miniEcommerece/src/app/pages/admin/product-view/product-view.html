@@ -1,17 +1,12 @@
 <div class="card">
-
   <div class="card-header d-flex justify-content-between">
     <h5>Products</h5>
 
-    <button class="btn btn-success">
-      Add New
-    </button>
+    <button [routerLink]="['/admin/product/add']" class="btn btn-success">Add New</button>
   </div>
 
   <div class="card-body">
-
     <table class="table table-striped">
-
       <thead>
         <tr>
           <th>ID</th>
@@ -25,35 +20,10 @@
       </thead>
 
       <tbody>
-
-        <tr>
-          <td>1</td>
-
-          <td>
-            <img
-              src="https://via.placeholder.com/60"
-              width="60">
-          </td>
-
-          <td>iPhone 15</td>
-          <td>Electronics</td>
-          <td>₹80,000</td>
-          <td>20</td>
-
-          <td>
-            <button class="btn btn-warning btn-sm me-2">
-              Edit
-            </button>
-
-            <button class="btn btn-danger btn-sm">
-              Delete
-            </button>
-          </td>
-        </tr>
-
+        @for (item of productData(); track item.id) {
+          <tr app-product-rows (refresh)="getProduct()" [pData]="item" [index]="$index"></tr>
+        }
       </tbody>
-
     </table>
-
   </div>
 </div>
