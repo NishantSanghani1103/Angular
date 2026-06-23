@@ -1,0 +1,7 @@
+footer a:hover {
+  color: #0d6efd !important;
+}
+
+footer ul li {
+  cursor: pointer;
+}

@@ -2,6 +2,7 @@
   <a
     class="navbar-brand fw-bold"
     routerLinkActive="active"
+    routerLink="/"
     [routerLinkActiveOptions]="{ exact: true }"
   >
     ShopZone
@@ -51,7 +52,7 @@
 
     <div class="d-flex align-items-center text-white">
       @if (auth.user()) {
-        <span (click)="auth.logOut()" class="me-3" style="cursor: pointer" routerLink="/"
+        <span (click)="auth.logOut()" class="me-3" style="cursor: pointer" 
           >LogOut</span
         >
       } @else {

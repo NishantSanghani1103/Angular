@@ -1,5 +1,5 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Component, computed, effect, inject, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal, ViewChild } from '@angular/core';
 import { apiBaseUrl } from '../../../environment/environment';
 import { Product } from '../../models/product.model/product.model';
 import { ProductRow } from '../product-row/product-row';
@@ -12,20 +12,26 @@ import { FormsModule } from '@angular/forms';
 import { firstValueFrom, lastValueFrom } from 'rxjs';
 import { ApiService } from '../../service/api.service';
 import { CartService } from '../../service/cart.service';
+import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+
 @Component({
   selector: 'app-product-listing',
-  imports: [ProductRow, CategoryRow, BrandRow, FormsModule],
+  imports: [ProductRow, CategoryRow, BrandRow, FormsModule, MatPaginatorModule],
   templateUrl: './product-listing.html',
   styleUrl: './product-listing.css',
 })
 export class ProductListing {
+  @ViewChild('paginator') paginator!: MatPaginator;
   http = inject(HttpClient);
-  cartService=inject(CartService)
+  cartService = inject(CartService);
   apiUrl = signal<string>(apiBaseUrl);
   productData = signal<Product[]>([]);
   categoryData = signal<Category[]>([]);
   brandData = signal<Brands[]>([]);
   loading = signal<boolean>(true);
+  currentPage = 1;
+  pageSize = 4;
+  totalRecords = signal<number>(0);
   private initialized = false;
   filterProduct = signal<ProductFiltersType>({
     categories: [],
@@ -42,6 +48,8 @@ export class ProductListing {
 
   constructor(private apiService: ApiService) {
     effect(() => {
+      console.log(this.totalRecords());
+
       this.filterProduct();
 
       if (!this.initialized) {
@@ -102,6 +110,14 @@ export class ProductListing {
   //   }
   // }
 
+  onPageChange(event: any) {
+    console.log(event);
+    this.currentPage = event.pageIndex + 1;
+    this.pageSize = event.pageSize;
+    this.getProduct();
+    
+  }
+
   async getProduct() {
     const res = await this.apiService.request<Product[]>(
       'GET',
@@ -109,6 +125,8 @@ export class ProductListing {
       null,
       {
         categoryId: this.filterProduct().categories.join(','),
+        skip: this.currentPage ?? 1,
+        limit: this.pageSize,
       },
       {
         showLoader: true,
@@ -116,6 +134,7 @@ export class ProductListing {
       },
     );
     this.productData.set(res.data ?? []);
+    this.totalRecords.set(res['count']);
     console.log(res);
   }
 
@@ -157,6 +176,8 @@ export class ProductListing {
         categories: this.filterProduct().categories.filter((val, ind) => val != event.target.value),
       }));
     }
+    this.currentPage = 1;
+    this.paginator.firstPage()
   }
 
   brandsChange(event: any) {

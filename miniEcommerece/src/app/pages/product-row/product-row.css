@@ -1,0 +1,5 @@
+.product-name {
+  white-space: nowrap;      /* keeps text in one line */
+  overflow: hidden;         /* hides extra text */
+  text-overflow: ellipsis;  /* adds "..." at the end */
+}

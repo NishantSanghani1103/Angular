@@ -30,7 +30,7 @@ export class ApiService {
     apiOption: Partial<typeof this.apiOptions> = this.apiOptions,
   ): Promise<ApiResponse<T>> {
     console.log(params);
-    
+
     const url = `${this.baseUrl}/${endpoint}`;
     // console.log(url);
     const mergedOption = { ...this.apiOptions, ...apiOption };
@@ -72,7 +72,9 @@ export class ApiService {
           response = await lastValueFrom(this.http.post<ApiResponse<T>>(url, body, { headers }));
           break;
         case 'PUT':
-          response = await lastValueFrom(this.http.put<ApiResponse<T>>(url, body, { headers,params }));
+          response = await lastValueFrom(
+            this.http.put<ApiResponse<T>>(url, body, { headers, params }),
+          );
           break;
         case 'DELETE':
           response = await lastValueFrom(this.http.delete<ApiResponse<T>>(url, { headers }));
@@ -81,7 +83,7 @@ export class ApiService {
           throw new Error('Invalid Method');
       }
       console.log(response);
-      
+
       let resp: any = {
         message: response.message,
         code: response.code,
@@ -95,20 +97,30 @@ export class ApiService {
       if (mergedOption.showToaster) {
         this.toast.success(resp?.message);
       }
-      this.loader.hide();
+      // this.loader.hide();
       return resp;
     } catch (error: any) {
       // console.log(error);
       const fieldErrors = error.error;
-      // console.log(fieldErrors);
+      console.log(fieldErrors);
+      if (fieldErrors?.errors) {
+        this.toast.error(fieldErrors?.errors );
+    
+        throw error;
+      }
       // console.log(obj);
-      this.toast.error(fieldErrors.message);
-      this.loader.hide();
+      this.toast.error(fieldErrors.message || "Netwok Error");
+  
       throw {
         message: fieldErrors.message,
         code: error.status,
         status: false,
       };
+    }
+    finally{
+      if(mergedOption.showLoader){
+        this.loader.hide()
+      }
     }
   }
 }

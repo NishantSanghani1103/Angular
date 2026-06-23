@@ -20,10 +20,10 @@
       <!-- Buttons -->
       <div class="mt-4 w-100">
         <button
-        [ngClass]="{
-          'bg-danger text-white border-white':isInCart()
-        }"
-        [disabled]="isInCart()"
+          [ngClass]="{
+            'bg-danger text-white border-white': isInCart() || pData()?.stock === 0,
+          }"
+          [disabled]="isInCart() || pData()?.stock === 0"
           (click)="
             cartService.addToCart({
               id: pData()?.id,
@@ -33,7 +33,7 @@
           "
           class="btn btn-dark btn-lg w-100"
         >
-          {{ isInCart() ? 'Added' : '   Add to Cart' }}
+          {{ pData()?.stock === 0 ? 'Out Of Stock' : isInCart() ? 'Added' : '   Add to Cart' }}
         </button>
       </div>
 

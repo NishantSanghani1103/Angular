@@ -175,8 +175,12 @@
               <span>Total</span>
               <span>₹ {{ cartService.cartTotal() }}</span>
             </div>
-
-            <button class="btn btn-primary w-100 mt-3 place-order-btn">Place Order</button>
+            <button
+              [disabled]="shippingForm.invalid"
+              class="btn btn-primary w-100 mt-3 place-order-btn"
+            >
+              Place Order
+            </button>
           </div>
         </div>
       </div>

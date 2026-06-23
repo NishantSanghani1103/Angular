@@ -100,6 +100,16 @@
           </div>
         }
       </div>
+
+      <mat-paginator
+        class="my-5"
+        #paginator
+        [length]="totalRecords()"
+        [pageSize]="4"
+        [pageSizeOptions]="[4, 8, 16, 32]"
+        (page)="onPageChange($event)"
+      >
+      </mat-paginator>
     </div>
   </div>
 </div>

@@ -21,9 +21,23 @@
 
       <tbody>
         @for (item of productData(); track item.id) {
-          <tr app-product-rows (refresh)="getProduct()" [pData]="item" [index]="$index"></tr>
+          <tr
+            app-product-rows
+            (refresh)="getProduct()"
+            [pData]="item"
+            [index]="(currentPage - 1) * pageSize + $index "
+          ></tr>
         }
       </tbody>
     </table>
+
+    <mat-paginator
+      #paginator
+      [length]="totalRecords()"
+      [pageSize]="4"
+      [pageSizeOptions]="[4, 8, 16, 32]"
+      (page)="onPageChange($event)"
+    >
+    </mat-paginator>
   </div>
 </div>

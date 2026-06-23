@@ -1,20 +1,21 @@
 <div class="card shadow-sm border-0 h-100">
   <img
-    style="cursor: pointer"
+    style="cursor: pointer; height: 350px; object-fit: cover"
     [routerLink]="['/product', pData.slug]"
     [src]="pData.imagesUrl[0]"
     class="card-img-top"
     alt=""
   />
   <div class="card-body">
-    <h6 class="fw-bold">{{ pData.name }}</h6>
-    <p class="text-muted mb-1">{{ pData.category.name }}</p>
+    <h6 class="fw-bold product-name text-capitalize">{{ pData.name }}</h6>
+    <p class="text-muted mb-1 text-capitalize">{{ pData.category.name }}</p>
     <h6 class="fw-bold">₹ {{ pData.price }}</h6>
     @if (!isInCart()) {
       <button
-      [disabled]="checkCart()"
+
+        [disabled]="checkCart() || pData.stock == 0"
         [ngClass]="{
-          'bg-danger text-white border-white': checkCart(),
+          'bg-danger text-white border-white': checkCart() || pData.stock == 0,
         }"
         (click)="
           cart.addToCart({
@@ -25,7 +26,7 @@
         "
         class="btn btn-dark w-100 mt-2"
       >
-        {{ checkCart() ? 'ADDED' : '    Add To Cart' }}
+        {{ pData.stock === 0 ? 'Out of Stock' : checkCart() ? 'ADDED' : '    Add To Cart' }}
       </button>
     }
     @if (isInCart()) {
