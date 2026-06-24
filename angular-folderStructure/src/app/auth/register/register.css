@@ -1,0 +1,15 @@
+.card {
+  overflow: hidden;
+}
+
+.form-control {
+  border-radius: 10px;
+}
+
+.btn {
+  border-radius: 10px;
+}
+
+.form-check-input {
+  cursor: pointer;
+}

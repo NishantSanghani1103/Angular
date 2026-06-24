@@ -1,315 +1,48 @@
 <div class="container py-4">
-
   <!-- Page Header -->
   <div class="d-flex justify-content-between align-items-center mb-4">
-
     <div>
-      <h2 class="fw-bold mb-0">
-        All Products
-      </h2>
-      <small class="text-muted">
-        Showing 24 Products
-      </small>
+      <h2 class="fw-bold mb-0">All Products</h2>
+      <small class="text-muted"> Showing 24 Products </small>
     </div>
 
-    <div>
-      <select class="form-select">
-        <option>Sort By</option>
-        <option>Price Low To High</option>
-        <option>Price High To Low</option>
-        <option>Newest First</option>
-      </select>
-    </div>
 
   </div>
 
   <div class="row">
-
     <!-- Sidebar -->
-    <div class="col-lg-3 mb-4">
 
-      <div class="card shadow-sm">
-
-        <div class="card-header bg-white">
-          <h5 class="mb-0">Filters</h5>
-        </div>
-
-        <div class="card-body">
-
-          <!-- Category -->
-          <div class="mb-4">
-
-            <h6 class="fw-bold mb-3">
-              Category
-            </h6>
-
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox">
-              <label class="form-check-label">
-                Electronics
-              </label>
-            </div>
-
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox">
-              <label class="form-check-label">
-                Fashion
-              </label>
-            </div>
-
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox">
-              <label class="form-check-label">
-                Shoes
-              </label>
-            </div>
-
-          </div>
-
-          <hr>
-
-          <!-- Price -->
-          <div class="mb-4">
-
-            <h6 class="fw-bold mb-3">
-              Price Range
-            </h6>
-
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="price">
-              <label class="form-check-label">
-                ₹0 - ₹1000
-              </label>
-            </div>
-
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="price">
-              <label class="form-check-label">
-                ₹1000 - ₹5000
-              </label>
-            </div>
-
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="price">
-              <label class="form-check-label">
-                ₹5000+
-              </label>
-            </div>
-
-          </div>
-
-          <hr>
-
-          <!-- Brand -->
-          <div>
-
-            <h6 class="fw-bold mb-3">
-              Brands
-            </h6>
-
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox">
-              <label class="form-check-label">
-                Apple
-              </label>
-            </div>
-
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox">
-              <label class="form-check-label">
-                Samsung
-              </label>
-            </div>
-
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox">
-              <label class="form-check-label">
-                Nike
-              </label>
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
 
     <!-- Product Grid -->
     <div class="col-lg-9">
-
       <div class="row g-4">
+        @for (item of productData(); track item.id) {
+          <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+              <img [src]="item.thumbnail" class="card-img-top" alt="" />
 
+              <div class="card-body">
+                <span class="badge bg-success mb-2"> In Stock </span>
+
+                <h5 class="card-title">{{ item.title }}</h5>
+
+                <p class="text-muted small">{{ item.description }}</p>
+
+                <h4 class="text-primary">₹{{ item.price }}</h4>
+              </div>
+
+              <div class="card-footer bg-white border-0">
+                <button class="btn btn-primary w-100">Add To Cart</button>
+              </div>
+            </div>
+          </div>
+        }
         <!-- Product Card 1 -->
-        <div class="col-md-4">
-          <div class="card h-100 shadow-sm">
-
-            <img
-              src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9"
-              class="card-img-top"
-              alt=""
-            >
-
-            <div class="card-body">
-
-              <span class="badge bg-success mb-2">
-                In Stock
-              </span>
-
-              <h5 class="card-title">
-                iPhone 15 Pro
-              </h5>
-
-              <p class="text-muted small">
-                Latest Apple flagship smartphone.
-              </p>
-
-              <h4 class="text-primary">
-                ₹79,999
-              </h4>
-
-            </div>
-
-            <div class="card-footer bg-white border-0">
-
-              <button class="btn btn-primary w-100">
-                Add To Cart
-              </button>
-
-            </div>
-
-          </div>
-        </div>
-
-        <!-- Product Card 2 -->
-        <div class="col-md-4">
-          <div class="card h-100 shadow-sm">
-
-            <img
-              src="https://images.unsplash.com/photo-1542291026-7eec264c27ff"
-              class="card-img-top"
-              alt=""
-            >
-
-            <div class="card-body">
-
-              <span class="badge bg-success mb-2">
-                In Stock
-              </span>
-
-              <h5 class="card-title">
-                Nike Air Max
-              </h5>
-
-              <p class="text-muted small">
-                Comfortable running shoes.
-              </p>
-
-              <h4 class="text-primary">
-                ₹4,999
-              </h4>
-
-            </div>
-
-            <div class="card-footer bg-white border-0">
-
-              <button class="btn btn-primary w-100">
-                Add To Cart
-              </button>
-
-            </div>
-
-          </div>
-        </div>
-
-        <!-- Product Card 3 -->
-        <div class="col-md-4">
-          <div class="card h-100 shadow-sm">
-
-            <img
-              src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e"
-              class="card-img-top"
-              alt=""
-            >
-
-            <div class="card-body">
-
-              <span class="badge bg-warning text-dark mb-2">
-                Limited Stock
-              </span>
-
-              <h5 class="card-title">
-                Sony Headphones
-              </h5>
-
-              <p class="text-muted small">
-                Premium noise cancellation.
-              </p>
-
-              <h4 class="text-primary">
-                ₹6,999
-              </h4>
-
-            </div>
-
-            <div class="card-footer bg-white border-0">
-
-              <button class="btn btn-primary w-100">
-                Add To Cart
-              </button>
-
-            </div>
-
-          </div>
-        </div>
-
-        <!-- Repeat More Cards -->
-
       </div>
 
       <!-- Pagination -->
 
-      <nav class="mt-5">
-
-        <ul class="pagination justify-content-center">
-
-          <li class="page-item disabled">
-            <a class="page-link">
-              Previous
-            </a>
-          </li>
-
-          <li class="page-item active">
-            <a class="page-link">
-              1
-            </a>
-          </li>
-
-          <li class="page-item">
-            <a class="page-link">
-              2
-            </a>
-          </li>
-
-          <li class="page-item">
-            <a class="page-link">
-              3
-            </a>
-          </li>
-
-          <li class="page-item">
-            <a class="page-link">
-              Next
-            </a>
-          </li>
-
-        </ul>
-
-      </nav>
-
+      
     </div>
-
   </div>
-
 </div>

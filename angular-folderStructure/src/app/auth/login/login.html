@@ -1,1 +1,55 @@
-<p>login works!</p>
+<div class="container-fluid min-vh-100 d-flex align-items-center justify-content-center bg-light">
+  <div class="row w-100 justify-content-center">
+    <div class="col-md-5 col-lg-4">
+      <div class="card shadow border-0 rounded-4">
+        <div class="card-body p-5">
+          <form (submit)="handleSubmit()" [formGroup]="loginForm" action="">
+            <!-- Logo -->
+            <div class="text-center mb-4">
+              <h2 class="fw-bold text-primary">ShopZone</h2>
+              <p class="text-muted mb-0">Sign in to your account</p>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+              <label class="form-label fw-semibold"> Email Address </label>
+              <input
+                formControlName="email"
+                type="email"
+                class="form-control form-control-lg"
+                placeholder="Enter your email"
+              />
+              <app-form-validation-error [control]="f['email']" label="email"></app-form-validation-error>
+            </div>
+
+            <!-- Password -->
+            <div class="mb-3">
+              <label class="form-label fw-semibold"> Password </label>
+              <input
+                formControlName="password"
+                type="password"
+                class="form-control form-control-lg"
+                placeholder="Enter your password"
+              />
+              <app-form-validation-error
+                [control]="f['password']"
+                label="password"
+              ></app-form-validation-error>
+            </div>
+
+            <!-- Remember Me -->
+
+            <!-- Login Button -->
+            <div class="d-grid mb-4">
+              <button [disabled]="loginForm.invalid" type="submit" class="btn btn-primary btn-lg">Login</button>
+            </div>
+
+            <!-- Divider -->
+
+            <!-- Social Buttons -->
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

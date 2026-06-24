@@ -1,15 +1,22 @@
 {
   "products": [
     {
-      "title": "ThinkPad",
-      "description": "Copilot+ PC: A new era of AI: The fastest, most intelligent Surface Laptop ever",
-      "category": "leptop",
-      "brand": "dell",
+      "title": "Lenovo Leptop",
       "price": 50000,
       "stock": 2,
-      "rating": 4.5,
+      "category": "leptop",
+      "description": "Copilot+ PC: A new era of AI: The fastest, most intelligent Surface Laptop ever",
       "thumbnail": "https://m.media-amazon.com/images/I/510uTHyDqGL._AC_UF1000,1000_QL80_.jpg",
-      "id": "2BxNuYB2-9I"
+      "id": "ss-9I"
+    },
+    {
+      "title": "Saral Home Brown Handloom Solid Runner",
+      "price": 1050,
+      "stock": 3,
+      "category": "Home",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "thumbnail": "https://m.media-amazon.com/images/I/61PwmEBXHBL._AC_UF894,1000_QL80_.jpg",
+      "id": "Q5lnzoi0jaI"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

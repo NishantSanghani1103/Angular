@@ -11,16 +11,14 @@
           </li>
 
           <li class="nav-item mb-2">
-            <a href="#" class="nav-link text-white"> Add Product </a>
+            <a routerLink="product/add" class="nav-link text-white"> Add Product </a>
           </li>
 
           <li class="nav-item mb-2">
-            <a href="#" class="nav-link text-white"> View Products </a>
+            <a routerLink="product/view" class="nav-link text-white"> View Products </a>
           </li>
 
-          <li class="nav-item mb-2">
-            <a href="#" class="nav-link text-white"> Orders </a>
-          </li>
+         
         </ul>
       </div>
     </div>
@@ -32,7 +30,7 @@
         <div class="container-fluid">
           <span class="navbar-brand mb-0 h1"> Ecommerce Admin </span>
 
-          <button class="btn btn-danger">Logout</button>
+          <button (click)="authService.logOut()"  class="btn btn-danger">Logout</button>
         </div>
       </nav>
 

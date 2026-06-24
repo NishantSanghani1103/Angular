@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'app-form-validation-error',
@@ -6,4 +7,7 @@ import { Component } from '@angular/core';
   templateUrl: './form-validation-error.html',
   styleUrl: './form-validation-error.css',
 })
-export class FormValidationError {}
+export class FormValidationError {
+  @Input() control!: AbstractControl | null;
+  @Input() label = 'Field';
+}

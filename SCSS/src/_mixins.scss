@@ -1,0 +1,5 @@
+@import 'variables';
+@mixin highlightBox($borderColor) {
+  background-color: $backGroundColor;
+  border: 2px solid $borderColor;
+}

@@ -1,62 +1,99 @@
 <div class="card">
-
-  <div class="card-header">
-    Add Product
-  </div>
+  <div class="card-header">Add Product</div>
 
   <div class="card-body">
-
-    <form>
-
+    <form (submit)="productData()" [formGroup]="productForm">
       <!-- Product Name -->
       <div class="mb-3">
         <label class="form-label">Product Name</label>
-        <input type="text" class="form-control" placeholder="Enter product name">
+        <input
+          appInoutNumber
+          formControlName="title"
+          type="text"
+          class="form-control"
+          placeholder="Enter product name"
+        />
+        <app-form-validation-error [control]="f['title']" label="title"></app-form-validation-error>
       </div>
 
       <!-- Category -->
       <div class="mb-3">
         <label class="form-label">Category</label>
-        <select class="form-select">
-          <option selected>--Select Category--</option>
-          <option>Electronics</option>
-          <option>Fashion</option>
-          <option>Home Appliances</option>
-          <option>Books</option>
-        </select>
+        <input
+          appInoutNumber
+          formControlName="category"
+          type="text"
+          class="form-control"
+          placeholder="Enter Category name"
+        />
+        <app-form-validation-error
+          [control]="f['category']"
+          label="category"
+        ></app-form-validation-error>
       </div>
 
       <!-- Price -->
       <div class="mb-3">
         <label class="form-label">Price</label>
-        <input type="number" class="form-control" placeholder="Enter price">
+        <input
+          appInoutNumber
+          type="number"
+          formControlName="price"
+          class="form-control"
+          placeholder="Enter price"
+        />
+        <app-form-validation-error [control]="f['price']" label="price"></app-form-validation-error>
       </div>
 
       <!-- Stock -->
       <div class="mb-3">
         <label class="form-label">Stock</label>
-        <input type="number" class="form-control" placeholder="Enter stock quantity">
+        <input
+          appInoutNumber
+          type="number"
+          formControlName="stock"
+          class="form-control"
+          placeholder="Enter stock quantity"
+        />
+        <app-form-validation-error [control]="f['stock']" label="stock"></app-form-validation-error>
       </div>
 
       <!-- Product Image -->
       <div class="mb-3">
         <label class="form-label">Product Image</label>
-        <input type="file" class="form-control" multiple accept="image/*">
+        <input
+          appInoutNumber
+          type="text"
+          formControlName="thumbnail"
+          class="form-control"
+          placeholder="Enter Image Url"
+        />
+        <app-form-validation-error
+          [control]="f['thumbnail']"
+          label="thumbnail"
+        ></app-form-validation-error>
       </div>
 
       <!-- Description -->
       <div class="mb-3">
         <label class="form-label">Description</label>
-        <textarea rows="4" class="form-control" placeholder="Enter product description"></textarea>
+        <textarea
+          appInoutNumber
+          rows="4"
+          formControlName="description"
+          class="form-control"
+          placeholder="Enter product description"
+        ></textarea>
+        <app-form-validation-error
+          [control]="f['description']"
+          label="description"
+        ></app-form-validation-error>
       </div>
 
       <!-- Submit Button -->
-      <button type="button" class="btn btn-primary">
-        ADD Product
+      <button [disabled]="productForm.invalid" type="submit" class="btn btn-primary">
+        {{ pId() ? 'EDIT' : 'ADD' }} Product
       </button>
-
     </form>
-
   </div>
-
 </div>

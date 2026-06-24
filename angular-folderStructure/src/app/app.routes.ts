@@ -7,14 +7,48 @@ import { AdminLayout } from './features/admin/admin-layout/admin-layout';
 import { Dashboard } from './features/admin/dashboard/dashboard';
 import { ProductAdd } from './features/admin/product-add/product-add';
 import { ProductView } from './features/admin/product-view/product-view';
+import { Login } from './auth/login/login';
+import { Register } from './auth/register/register';
+import { AuthLayout } from './auth/auth-layout/auth-layout';
+import { authGuard } from './core/guards/auth-guard';
+import { UnAuthorized } from './shared/components/un-authorized/un-authorized';
+import { loginGuard } from './core/guards/login-guard';
 
 export const routes: Routes = [
   {
     path: '',
-    component: UserLayout,
+    redirectTo: 'login',
+    pathMatch: 'full',
+  },
+  {
+    path: 'un-authorized',
+    component: UnAuthorized,
+  },
+  {
+    path: '',
+    component: AuthLayout,
+    canActivate: [loginGuard],
     children: [
       {
-        path: '',
+        path: 'login',
+        component: Login,
+      },
+      {
+        path: 'register',
+        component: Register,
+      },
+    ],
+  },
+  {
+    path: '',
+    component: UserLayout,
+    canActivate: [authGuard],
+    data: {
+      roles: ['user'],
+    },
+    children: [
+      {
+        path: 'home',
         component: Home,
       },
       {
@@ -29,7 +63,12 @@ export const routes: Routes = [
   },
   {
     path: 'admin',
-    component: AdminLayout,
+    loadComponent: () =>
+      import('./features/admin/admin-layout/admin-layout').then((res) => res.AdminLayout),
+    canActivate: [authGuard],
+    data: {
+      roles: 'admin',
+    },
     children: [
       {
         path: 'dashboard',
@@ -40,6 +79,10 @@ export const routes: Routes = [
         children: [
           {
             path: 'add',
+            component: ProductAdd,
+          },
+          {
+            path: 'edit/:id',
             component: ProductAdd,
           },
           {

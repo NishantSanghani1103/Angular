@@ -7,6 +7,7 @@ import { AuthService } from '../../service/auth.service';
 import { ValidationError } from '../../common/validation-error/validation-error';
 import { ApiService } from '../../service/api.service';
 import { LoginResType } from '../../models/loginModel';
+import { DemoService } from '../../service/demo.service';
 
 @Component({
   selector: 'app-login',
@@ -22,6 +23,7 @@ export class Login {
     public router: Router,
     private authService: AuthService,
     public apiService: ApiService,
+    private demoService:DemoService
   ) {}
   ngOnInit() {
     this.initializeForm();
